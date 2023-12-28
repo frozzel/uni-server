@@ -2,12 +2,14 @@
 const express = require('express');
 require('dotenv').config()// import dotenv
 require('./config/connections')//   import database connection
+var cors = require('cors')// import cors
 
 
 /////////////////////////// use middleware ///////////////////////////
 const app = express();
 app.use(express.static('public'));
 app.use(express.json())// parse json request body
+app.use(cors())// enable cors
 
 /////////////////////////// import routes ///////////////////////////
 const chatgptRouter = require('./routes/chatgpt.js');
