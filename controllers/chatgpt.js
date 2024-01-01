@@ -14,7 +14,7 @@ exports.chatGPT = async (req, res) => {
     
     try {
         const { userMessage } = req.body;
-    
+        console.log(req.body)
         if (!userMessage) {
           return res.status(400).json({ error: 'User message is required.' });
         }
