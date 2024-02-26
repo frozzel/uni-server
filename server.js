@@ -13,9 +13,11 @@ app.use(cors())// enable cors
 
 /////////////////////////// import routes ///////////////////////////
 const chatgptRouter = require('./routes/chatgpt.js');
+const hubspotRouter = require('./routes/hubspot.js');
 
 /////////////////////////// use routes ///////////////////////////
 app.use('/api/chatgpt', chatgptRouter);
+app.use('/api/hubspot', hubspotRouter);
 
 
 /////////////////////////// start server ///////////////////////////
