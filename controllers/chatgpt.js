@@ -35,7 +35,7 @@ exports.chatGPT = async (req, res) => {
             },
           }
         );
-    
+          
         const reply = response.data.choices[0].message.content;
     
         return res.json({ reply });
