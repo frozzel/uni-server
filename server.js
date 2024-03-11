@@ -14,10 +14,14 @@ app.use(cors())// enable cors
 /////////////////////////// import routes ///////////////////////////
 const chatgptRouter = require('./routes/chatgpt.js');
 const hubspotRouter = require('./routes/hubspot.js');
+const cronRouter = require('./routes/cron.js');
+const twitterRouter = require('./routes/twitter.js');
 
 /////////////////////////// use routes ///////////////////////////
 app.use('/api/chatgpt', chatgptRouter);
 app.use('/api/hubspot', hubspotRouter);
+app.use('/api/cron', cronRouter);
+app.use('/api/twitter', twitterRouter);
 
 
 /////////////////////////// start server ///////////////////////////
