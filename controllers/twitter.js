@@ -1,7 +1,7 @@
 const axios = require('axios');
-const {downloadFile} = require('../utils/download.js');
 const {TwitterApi} = require('twitter-api-v2');
 const cron = require('node-cron');
+const {downloadFile} = require('../Utils/download.js');
 
 
 ////////// Test API //////////
