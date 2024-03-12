@@ -1,4 +1,5 @@
 const axios = require('axios');
+const fs = require('fs');
 
 
 ////////// Test API //////////
@@ -49,8 +50,10 @@ exports.getInfo = async (req, res) => {
 
 
 const linkToBlogPost = 'https://cyrusgroupinnovations.com/blog/boosting-small-business-content-creation-with-ai';
-const linkToImage = 'https://45070224.fs1.hubspotusercontent-na1.net/hubfs/45070224/business%20documents%20on%20office%20table%20with%20smart%20phone%20and%20digital%20tablet%20and%20graph%20financial%20with%20social%20network%20diagram%20and%20man%20working%20in%20the%20background.jpeg';
-const linkToImage2 = "./crm-statistics.jpg";
+// const linkToImage = 'https://45070224.fs1.hubspotusercontent-na1.net/hubfs/45070224/business%20documents%20on%20office%20table%20with%20smart%20phone%20and%20digital%20tablet%20and%20graph%20financial%20with%20social%20network%20diagram%20and%20man%20working%20in%20the%20background.jpeg';
+const linkToImage = "/Users/frozzel/Documents/BootCampGT/uni-server/downloaded-image.jpeg";
+
+console.log('Image Path', linkToImage);
 // Function to download image from URL
 
 
@@ -58,6 +61,47 @@ const linkToImage2 = "./crm-statistics.jpg";
 
 exports.postToLinkedIn = async (req, res) => {
     try {
+        const resp = await axios.post(
+          `https://api.linkedin.com/rest/images?action=initializeUpload`,
+          {
+            "initializeUploadRequest": {
+                  "owner": `urn:li:organization:${process.env.LINKEDIN_ORG_ID}`
+            }
+          },
+          {
+            headers: {
+              'LinkedIn-Version': '202402',
+              'X-Restli-Protocol-Version': '2.0.0',
+              'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+              'Content-Type': 'application/json'
+            }
+          }
+          );
+
+          const url = resp.data.value.uploadUrl;
+          console.log('URL', url);
+          const imageUrn = resp.data.value.image;
+          console.log('Image URN', imageUrn);
+
+          const resp2 = await axios.post(url, linkToImage, {
+      
+            // {
+            //   "uploadBinaryRequest": {
+            //     // "uploadUrl": url,
+            //     "binary": linkToImage
+            //   }
+            // },
+            
+              headers: {
+                'LinkedIn-Version': '202402',
+                'X-Restli-Protocol-Version': '2.0.0',
+                'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+                'Content-Type': 'image/jpg'
+              }
+            }
+          );
+
+            console.log('Image Uploaded', resp2.statusText);
 
         const response = await axios.post(
           `https://api.linkedin.com/rest/posts`, 
@@ -73,7 +117,7 @@ exports.postToLinkedIn = async (req, res) => {
             "content": {
                 "article": {
                     "source": linkToBlogPost,
-                    "thumbnail": "urn:li:image:D4E10AQH8oZGdGHaVlA",
+                    "thumbnail": imageUrn,
                     "title": "Sample Article Post with Image and Link",
                     "description": "some metadata about the article",
                 }
@@ -95,8 +139,10 @@ exports.postToLinkedIn = async (req, res) => {
         console.log('Post ', response.statusText);
         res.status(201).json(response.statusText);
       } catch (error) {
-        console.error('Error posting to LinkedIn:', error.response.data);
-        res.status(500).json({ error: error.response.data });
+        // console.error('Error posting to LinkedIn:', error.response.data);
+        // res.status(500).json({ error: error.response.data });
+        console.error('Error posting to LinkedIn:', error);
+        res.status(500).json({ error: error });
       }
     };
 

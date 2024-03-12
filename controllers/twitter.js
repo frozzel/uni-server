@@ -167,9 +167,10 @@ cron.schedule('0 21 * * 1-5', async () => {
             text: reply + ' ' + lastObject.url,
             media: { media_ids: [mediaId] }
         });
-        res.json(resp);
+        // res.json(resp);
+        console.log("Tweeted Successfully", resp);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'An error occurred while posting the tweet' });
+        // res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
 });

@@ -15,7 +15,7 @@ exports.testApi = (req, res) => {
 
 ////////// Cron API //////////
 
-cron.schedule('0 18 * * 1-5', async () => {
+cron.schedule('0 19 * * 1-5', async () => {
     try {
         const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
         const headers = {
@@ -103,10 +103,10 @@ cron.schedule('0 18 * * 1-5', async () => {
           );
     
           console.log('Post ', response.statusText);
-          res.status(201).json(response.statusText);
+          // res.status(201).json(response.statusText);
     } catch (error) {
       console.error('Error posting to LinkedIn:', error.response.data);
-      res.status(500).json({ error: error.response.data });
+      // res.status(500).json({ error: error.response.data });
     }
 
 
