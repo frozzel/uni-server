@@ -106,7 +106,7 @@ exports.postTweet = async (req, res) => {
 };
 ////////// Cron API //////////
 
-cron.schedule('0 17 * * 1-5', async () => {
+cron.schedule('0 21 * * 1-5', async () => {
     try {
         const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
         const headers = {
