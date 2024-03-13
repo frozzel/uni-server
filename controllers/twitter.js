@@ -137,7 +137,7 @@ cron.schedule('0 21 * * 1-5', async () => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
     
-        const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
+        const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
         
         const chatGPTResponse = await axios.post(
             chatGPTApiUrl,
