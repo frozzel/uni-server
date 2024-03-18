@@ -115,8 +115,8 @@ exports.testApi = (req, res) => {
 
 // }, null, true, 'America/New_York');
 
-cron.schedule('0 15 * * 1-5', async () => {
-  
+cron.schedule('14 15 * * 1-5', async () => {
+  try {
       const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
       const headers = {
           Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
@@ -264,6 +264,12 @@ cron.schedule('0 15 * * 1-5', async () => {
         }
         console.log('Post ', response.statusText);
   }
+
+  console.log('Post Completed');
+} catch (error) {
+  console.error('Error posting to LinkedIn:');
+  // res.status(500).json({ error: error.response.data });  
+}
 
 
 }, null, true, 'America/New_York');
