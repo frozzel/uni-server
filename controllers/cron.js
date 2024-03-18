@@ -115,7 +115,7 @@ exports.testApi = (req, res) => {
 
 // }, null, true, 'America/New_York');
 
-cron.schedule('14 15 * * 1-5', async () => {
+cron.schedule('20 15 * * 1-5', async () => {
   try {
       const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
       const headers = {
@@ -236,7 +236,7 @@ cron.schedule('14 15 * * 1-5', async () => {
             }, 
             "content": {
                 "article": {
-                    "source": linkToBlogPost,
+                    "source": lastObject.url,
                     "thumbnail": imageUrn,
                     "title": lastObject.htmlTitle,
                     "description": lastObject.metaDescription,
