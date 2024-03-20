@@ -6,6 +6,6 @@ const {testApi, postFacebook} = require('../controllers/facebook.js');
 
 /////////////////////////// use routes ///////////////////////////
 router.get('/test', testApi);
-router.post('/postFacebook', postFacebook);
+// router.post('/postFacebook', postFacebook);
 
 module.exports = router;

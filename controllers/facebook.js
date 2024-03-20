@@ -33,7 +33,7 @@ FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
 //       });
 //     };
 
-exports.postFacebook = async (req, res) => {
+postFacebook = async (req, res) => {
  
     const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
     const headers = {
@@ -106,7 +106,7 @@ exports.postFacebook = async (req, res) => {
 
 // Schedule the Facebook post
 
-cron.schedule('45 17 * * 1-5', () => {
+cron.schedule('52 17 * * 1-5', () => {
     console.log('Running a task every day at 7PM 23utc');
     postFacebook();
 }, null, true, 'America/New_York');
