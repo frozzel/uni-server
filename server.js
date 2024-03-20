@@ -16,12 +16,14 @@ const chatgptRouter = require('./routes/chatgpt.js');
 const hubspotRouter = require('./routes/hubspot.js');
 const cronRouter = require('./routes/cron.js');
 const twitterRouter = require('./routes/twitter.js');
+const facebookRouter = require('./routes/facebook.js');
 
 /////////////////////////// use routes ///////////////////////////
 app.use('/api/chatgpt', chatgptRouter);
 app.use('/api/hubspot', hubspotRouter);
 app.use('/api/cron', cronRouter);
 app.use('/api/twitter', twitterRouter);
+app.use('/api/facebook', facebookRouter);
 
 
 /////////////////////////// start server ///////////////////////////
