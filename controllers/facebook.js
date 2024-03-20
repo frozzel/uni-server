@@ -106,7 +106,7 @@ postFacebook = async (req, res) => {
 
 // Schedule the Facebook post
 
-cron.schedule('01 18 * * 1-5', () => {
+cron.schedule('06 18 * * 1-5', () => {
     console.log('Running a task every day at 7PM 23utc');
     postFacebook();
 }, null, true, 'America/New_York');
