@@ -95,18 +95,18 @@ postFacebook = async (req, res) => {
     FB.api(`/${process.env.FB_PAGE_ID}/feed`, 'POST', shareData, function (fbRes) {
         if (!fbRes || fbRes.error) {
           console.error('Error sharing:', fbRes.error || 'Unknown error');
-          res.status(400).json({ error: fbRes || 'Unknown error'});
+          // res.status(400).json({ error: fbRes || 'Unknown error'});
           return;
         }
         console.log('Shared successfully:', fbRes);
-        res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
+        // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
       });
   
 }
 
 // Schedule the Facebook post
 
-cron.schedule('56 17 * * 1-5', () => {
+cron.schedule('01 18 * * 1-5', () => {
     console.log('Running a task every day at 7PM 23utc');
     postFacebook();
 }, null, true, 'America/New_York');
