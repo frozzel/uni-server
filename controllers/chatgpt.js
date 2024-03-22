@@ -1,4 +1,9 @@
 const axios = require('axios');
+const fs = require('fs');
+const OpenAI = require('openai');
+const {downloadFile} = require('../Utils/download.js');
+
+
 
 ////////// Test API //////////
 exports.testApi = (req, res) => {
@@ -45,4 +50,25 @@ exports.chatGPT = async (req, res) => {
       }
 };
 
+
+exports.dallE = async (req, res) => {
+
+    const openai = new OpenAI({ apiKey: apiKey });
+
+    const promptText = "A happy little house with a garden";
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: 'Create an engaging image depicting a small business owner excitedly managing their website  Make sure the image highlights the advantages of marketing automation for small businesses and encourages viewers to seek more information by visiting our blog.',
+      n: 1,
+      size: "1024x1024",
+    });
+    image_url = response.data[0].url;
+    console.log(response)
+    
+
+    // Save the image to a file
+    const {filePath} = await downloadFile(image_url, 'dallE');
+    console.log('Image generated successfully!');
+    res.json({ image_url, filePath });
+}
 
