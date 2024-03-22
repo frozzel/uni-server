@@ -39,7 +39,7 @@
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
     "nodemon": "^3.0.2",
-    "openai": "^4.22.0",
+    "openai": "^4.29.2",
     "twitter-api-v2": "^1.16.0"
   }
 }
