@@ -100,7 +100,7 @@ postToInstagram = async (req, res) => {
 
 /////// cron post to instagram ///////
 
-cron.schedule('16 14 * * 1-5', () => {
+cron.schedule('35 14 * * 1-5', () => {
     console.log('Posting to Instagram at 8am (12utc)');
     postToInstagram();
 }, null, true, 'America/New_York');
