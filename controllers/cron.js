@@ -264,7 +264,7 @@ cron.schedule('30 18 * * 1-5', async () => {
         
   }
 
-  console.log('Post Completed');
+  console.log('Post to LinkedIn Completed');
 } catch (error) {
   console.error('Error posting to LinkedIn:');
   // res.status(500).json({ error: error.response.data });  

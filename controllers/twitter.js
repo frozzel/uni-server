@@ -108,6 +108,7 @@ exports.postTweet = async (req, res) => {
 
 cron.schedule('0 21 * * 1-5', async () => {
     try {
+        console.log('Running a task every weekday at 9:00 utc 5pm EST! Twitter!');
         const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
         const headers = {
             Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
@@ -170,7 +171,7 @@ cron.schedule('0 21 * * 1-5', async () => {
         // res.json(resp);
         console.log("Tweeted Successfully", resp);
     } catch (error) {
-        console.error(error);
+        console.error("Twitter Error Failure", error);
         // res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
 });

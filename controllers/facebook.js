@@ -94,11 +94,11 @@ postFacebook = async (req, res) => {
 
     FB.api(`/${process.env.FB_PAGE_ID}/feed`, 'POST', shareData, function (fbRes) {
         if (!fbRes || fbRes.error) {
-          console.error('Error sharing:', fbRes.error || 'Unknown error');
+          console.error('Error sharing: facebook', fbRes.error || 'Unknown error facebook');
           // res.status(400).json({ error: fbRes || 'Unknown error'});
           return;
         }
-        console.log('Shared successfully:', fbRes);
+        console.log('Shared successfully: Facebook', fbRes);
         // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
       });
   

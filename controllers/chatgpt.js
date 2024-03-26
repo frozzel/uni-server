@@ -58,9 +58,9 @@ exports.dallE = async (req, res) => {
     const promptText = "A happy little house with a garden";
     const response = await openai.images.generate({
       model: "dall-e-3",
-      prompt: 'Create an engaging image depicting a small business owner excitedly managing their website  Make sure the image highlights the advantages of marketing automation for small businesses and encourages viewers to seek more information by visiting our blog.',
+      prompt: "Generate an image depicting the concept of 'Leveraging Google Tag Manager for Enhanced Tracking and Analytics.' The image should visually convey the idea of using Google Tag Manager to optimize tracking and analytics processes without including any textual elements.",
       n: 1,
-      size: "1024x1024",
+      size: "1792x1024",
     });
     image_url = response.data[0].url;
     console.log(response)

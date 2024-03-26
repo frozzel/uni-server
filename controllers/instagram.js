@@ -75,13 +75,13 @@ postToInstagram = async (req, res) => {
         published: true
     }, function (response) {
         if (!response || response.error) {
-            console.error('Error uploading image:', response.error);
+            console.error('Error uploading image: Instagram', response.error);
             return;
         }
 
         const photoId = response.id;
 
-        console.log('Photo uploaded successfully:', photoId);
+        console.log('Photo uploaded successfully: Instagram', photoId);
 
         // Step 2: Publish the photo to Instagram
         FB.api(`/${process.env.IG_ID}/media_publish`, 'POST', {
@@ -100,7 +100,7 @@ postToInstagram = async (req, res) => {
 
 /////// cron post to instagram ///////
 
-cron.schedule('0 12 * * 1-5', () => {
+cron.schedule('16 14 * * 1-5', () => {
     console.log('Posting to Instagram at 8am (12utc)');
     postToInstagram();
 }, null, true, 'America/New_York');
