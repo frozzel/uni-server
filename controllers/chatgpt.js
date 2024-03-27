@@ -55,10 +55,38 @@ exports.dallE = async (req, res) => {
 
     const openai = new OpenAI({ apiKey: apiKey });
 
-    const promptText = "A happy little house with a garden";
+    const {userMessage}  = req.body;
+    console.log(req.body)
+    if (!userMessage) {
+      return res.status(400).json({ error: 'User message is required.' });
+    }
+
+    const dalleQuestion = `Create a dalle 3 prompt to create an image for this blog topic: ${userMessage}. Don't add text to the image in any way`;
+    console.log(dalleQuestion);
+    const response1 = await axios.post(
+      chatGPTApiUrl,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: dalleQuestion },
+        ],
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      }
+    );
+      
+    const reply = response1.data.choices[0].message.content;
+    console.log(reply);
+
+    // Generate an image using the DALL-E model
     const response = await openai.images.generate({
       model: "dall-e-3",
-      prompt: "Generate an image depicting the concept of 'Leveraging Google Tag Manager for Enhanced Tracking and Analytics.' The image should visually convey the idea of using Google Tag Manager to optimize tracking and analytics processes without including any textual elements.",
+      prompt: reply,
       n: 1,
       size: "1792x1024",
     });
