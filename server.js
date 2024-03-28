@@ -18,6 +18,7 @@ const cronRouter = require('./routes/cron.js');
 const twitterRouter = require('./routes/twitter.js');
 const facebookRouter = require('./routes/facebook.js');
 const instagramRouter = require('./routes/instagram.js');
+const newsRouter = require('./routes/news.js');
 
 /////////////////////////// use routes ///////////////////////////
 app.use('/api/chatgpt', chatgptRouter);
@@ -26,7 +27,7 @@ app.use('/api/cron', cronRouter);
 app.use('/api/twitter', twitterRouter);
 app.use('/api/facebook', facebookRouter);
 app.use('/api/instagram', instagramRouter);
-
+app.use('/api/news', newsRouter);
 
 /////////////////////////// start server ///////////////////////////
 const server = require('http').Server(app); // import http
