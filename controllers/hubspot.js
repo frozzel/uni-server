@@ -40,7 +40,7 @@ exports.getInfo = async (req, res) => {
 
                 // Get the last object in the array
                 const lastObject = data2[data2.length - 1];
-
+      
         res.json(lastObject);  
     } catch (error) {
         console.error(error);
