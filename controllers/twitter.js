@@ -39,7 +39,14 @@ const client = new TwitterApi({
 // };
 exports.postTweet = async (req, res) => {
     try {
-        const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
+        // Calculate the date 5 days ago
+        const fiveDaysAgo = new Date();
+        fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+
+        // Format the date to YYYY-MM-DD
+        const formattedDate = fiveDaysAgo.toISOString().split('T')[0];
+
+        const recentBlogPost = `https://api.hubapi.com/cms/v3/blogs/posts?limit=10&createdAfter=${formattedDate}`;
         const headers = {
             Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
             'Content-Type': 'application/json'
@@ -109,7 +116,14 @@ exports.postTweet = async (req, res) => {
 cron.schedule('0 21 * * 1-5', async () => {
     try {
         console.log('Running a task every weekday at 9:00 utc 5pm EST! Twitter!');
-        const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
+        // Calculate the date 5 days ago
+        const fiveDaysAgo = new Date();
+        fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+
+        // Format the date to YYYY-MM-DD
+        const formattedDate = fiveDaysAgo.toISOString().split('T')[0];
+
+        const recentBlogPost = `https://api.hubapi.com/cms/v3/blogs/posts?limit=10&createdAfter=${formattedDate}`;
         const headers = {
             Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
             'Content-Type': 'application/json'

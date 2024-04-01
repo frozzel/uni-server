@@ -14,7 +14,14 @@ exports.testApi = (req, res) => {
 
 exports.getInfo = async (req, res) => {
 
-    const pets = 'https://api.hubapi.com/cms/v3/blogs/posts';
+    // Calculate the date 5 days ago
+    const fiveDaysAgo = new Date();
+    fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+
+    // Format the date to YYYY-MM-DD
+    const formattedDate = fiveDaysAgo.toISOString().split('T')[0];
+
+    const pets = `https://api.hubapi.com/cms/v3/blogs/posts?limit=10&createdAfter=${formattedDate}`;
     const headers = {
         Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -44,6 +51,7 @@ exports.getInfo = async (req, res) => {
         res.json(lastObject);  
     } catch (error) {
         console.error(error);
+       
     }
 
 };
@@ -64,7 +72,14 @@ const linkToImage = "/Users/frozzel/Documents/BootCampGT/uni-server/controllers/
 
 exports.postToLinkedIn = async (req, res) => {
     try {
-      const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
+        // Calculate the date 5 days ago
+      const fiveDaysAgo = new Date();
+      fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+
+      // Format the date to YYYY-MM-DD
+      const formattedDate = fiveDaysAgo.toISOString().split('T')[0];
+
+      const recentBlogPost = `https://api.hubapi.com/cms/v3/blogs/posts?limit=10&createdAfter=${formattedDate}`;
       const headers = {
           Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
           'Content-Type': 'application/json'
@@ -216,7 +231,14 @@ exports.postToLinkedIn = async (req, res) => {
 
 exports.aiPostToLinkedIn = async (req, res) => {
   try {
-    const recentBlogPost = 'https://api.hubapi.com/cms/v3/blogs/posts'
+    // Calculate the date 5 days ago
+    const fiveDaysAgo = new Date();
+    fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+
+    // Format the date to YYYY-MM-DD
+    const formattedDate = fiveDaysAgo.toISOString().split('T')[0];
+
+    const recentBlogPost = `https://api.hubapi.com/cms/v3/blogs/posts?limit=10&createdAfter=${formattedDate}`;
     const headers = {
         Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
