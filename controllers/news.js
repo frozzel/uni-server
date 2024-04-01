@@ -13,8 +13,13 @@ exports.testApi = (req, res) => {
 exports.getNews = async (req, res) => {
     try {
         console.log('Getting News..........')
-        const news = await axios.get(`https://newsapi.org/v2/everything?pageSize=10&language=en&domains=wired.com,techcrunch.com,theverge.com,thenextweb.com&apiKey=${process.env.NEWS_API_KEY}`);
+        // const news = await axios.get(`https://newsapi.org/v2/everything?q=artificial intelligence OR SEO OR Analytics OR CRM OR Digital Marketing&pageSize=10&language=en&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`);
+        // const news = await axios.get(`https://newsapi.org/v2/top-headlines?sources=techcrunch,wired,the-next-web&apiKey=${process.env.NEWS_API_KEY}`);
+        const news = await axios.get(`https://newsapi.org/v2/everything?q=+small +business&domains=investing.com,fortune.com,seekingalpha.com&pageSize=100&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`);
+
+        
         console.log("News Articles", news.data.articles.length);
+
 
         const articles = news.data.articles.map((article) => {
             return {

@@ -1,6 +1,8 @@
 const axios = require('axios');
 const FB = require('fb');
 const cron = require('node-cron');
+const { random } = require('lodash');
+
 
 ////////// Test API //////////
 
@@ -111,6 +113,150 @@ postFacebook = async (req, res) => {
   
 }
 
+postFacebookTechNews = async (req, res) => {
+
+    console.log('Getting Tech News..........')
+    const news = await axios.get(`https://newsapi.org/v2/top-headlines?sources=techcrunch,wired,the-next-web&apiKey=${process.env.NEWS_API_KEY}`);
+    console.log("News Articles", news.data.articles.length);
+
+
+    const articles = news.data.articles.map((article) => {
+        return {
+            source: article.source.name,
+            title: article.title,
+            description: article.description,
+            url: article.url,
+            image: article.urlToImage,
+
+        }
+    }
+    )
+
+    const randomIndex = Math.floor(Math.random() * articles.length);
+
+    const lastObject = articles[randomIndex];
+    console.log(lastObject)
+
+
+    console.log("Last Tech News Obtained: ", lastObject.title, lastObject.description, lastObject.url);
+
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
+
+    const userMessage = `Compose a Facebook post for this news article with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
+
+    const chatGPTResponse = await axios.post(
+        chatGPTApiUrl,
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            { role: 'system', content: 'You are a helpful assistant.' },
+            { role: 'user', content: userMessage },
+          ],
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+          },
+        }
+      );
+
+    const reply = chatGPTResponse.data.choices[0].message.content;
+    console.log("CHATGPT", reply);
+
+    // Share the content on Facebook
+
+    const shareData = {
+      link: lastObject.url,
+      message: reply,
+    };
+
+    FB.api(`/${process.env.FB_PAGE_ID}/feed`, 'POST', shareData, function (fbRes) {
+        if (!fbRes || fbRes.error) {
+          console.error('Error sharing: facebook', fbRes.error || 'Unknown error facebook');
+          // res.status(400).json({ error: fbRes || 'Unknown error'});
+          return;
+        }
+        console.log('Shared successfully: Facebook', fbRes);
+        // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
+      });
+  
+}
+
+postFacebookBusNews = async (req, res) => {
+
+  console.log('Getting Tech News..........')
+  const news = await axios.get(`https://newsapi.org/v2/everything?q=+small +business&domains=investing.com,fortune.com,seekingalpha.com&pageSize=100&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`);
+  console.log("News Articles", news.data.articles.length);
+
+
+  const articles = news.data.articles.map((article) => {
+      return {
+          source: article.source.name,
+          title: article.title,
+          description: article.description,
+          url: article.url,
+          image: article.urlToImage,
+
+      }
+  }
+  )
+
+  const randomIndex = Math.floor(Math.random() * articles.length);
+
+  const lastObject = articles[randomIndex];
+  console.log(lastObject)
+
+
+  console.log("Last Tech News Obtained: ", lastObject.title, lastObject.description, lastObject.url);
+
+
+  const apiKey = process.env.OPENAI_API_KEY;
+  const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
+
+  const userMessage = `Compose a Facebook post for this news article with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
+
+  const chatGPTResponse = await axios.post(
+      chatGPTApiUrl,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: userMessage },
+        ],
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+  const reply = chatGPTResponse.data.choices[0].message.content;
+  console.log("CHATGPT", reply);
+
+  // Share the content on Facebook
+
+  const shareData = {
+    link: lastObject.url,
+    message: reply,
+  };
+
+  FB.api(`/${process.env.FB_PAGE_ID}/feed`, 'POST', shareData, function (fbRes) {
+      if (!fbRes || fbRes.error) {
+        console.error('Error sharing: facebook', fbRes.error || 'Unknown error facebook');
+        // res.status(400).json({ error: fbRes || 'Unknown error'});
+        return;
+      }
+      console.log('Shared successfully: Facebook', fbRes);
+      // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
+    });
+
+}
+// postFacebookBusNews();
 // Schedule the Facebook post
 
 cron.schedule('0 23 * * 1-5', () => {
@@ -119,3 +265,12 @@ cron.schedule('0 23 * * 1-5', () => {
 }, null, true, 'America/New_York');
 
 
+cron.schedule('0 13 * * *', () => {
+    console.log('Posting Tech News to facebook every day at 9AM 13utc');
+    postFacebookTechNews();
+} , null, true, 'America/New_York');
+
+cron.schedule('0 17 * * *', () => {
+    console.log('Posting Business News to facebook every day at 1PM 17utc');
+    postFacebookBusNews();
+}, null, true, 'America/New_York');
