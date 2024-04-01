@@ -111,6 +111,136 @@ exports.postTweet = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
 };
+
+postTweetTechNews = async (req, res) => {
+  
+    console.log('Getting Tech News..........')
+    const news = await axios.get(`https://newsapi.org/v2/top-headlines?sources=techcrunch,wired,the-next-web&apiKey=${process.env.NEWS_API_KEY}`);
+    console.log("News Articles", news.data.articles.length);
+
+
+    const articles = news.data.articles.map((article) => {
+        return {
+            source: article.source.name,
+            title: article.title,
+            description: article.description,
+            url: article.url,
+            image: article.urlToImage,
+
+        }
+    }
+    )
+
+    const randomIndex = Math.floor(Math.random() * articles.length);
+
+    const lastObject = articles[randomIndex];
+    
+
+
+    console.log("Last Tech News Obtained: ", lastObject.title, lastObject.description, lastObject.url);
+
+      const apiKey = process.env.OPENAI_API_KEY;
+      const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
+  
+      const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
+      
+      const chatGPTResponse = await axios.post(
+          chatGPTApiUrl,
+          {
+            model: 'gpt-3.5-turbo',
+            messages: [
+              { role: 'system', content: 'You are a helpful assistant.' },
+              { role: 'user', content: userMessage },
+            ],
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`,
+            },
+          }
+        );
+          
+      const reply = chatGPTResponse.data.choices[0].message.content;
+        console.log("CHATGPT", reply);
+
+      // const img = req.body.imageUrl; // Assuming the image URL is provided in the request body
+      const { filePath } = await downloadFile(lastObject.image); // Download the image and get the file path
+      const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+      // const tweet = req.body.tweet;
+      const resp = await client.v2.tweet({
+          text: reply + ' ' + lastObject.url,
+          media: { media_ids: [mediaId] }
+      });
+      console.log("Tweeted Successfully", resp);
+
+};
+
+postTweetBusNews = async (req, res) => {
+  
+  console.log('Getting Tech News..........')
+  const news = await axios.get(`https://newsapi.org/v2/everything?q=+small +business&domains=investing.com,fortune.com,seekingalpha.com&pageSize=100&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`);
+  console.log("News Articles", news.data.articles.length);
+
+
+  const articles = news.data.articles.map((article) => {
+      return {
+          source: article.source.name,
+          title: article.title,
+          description: article.description,
+          url: article.url,
+          image: article.urlToImage,
+
+      }
+  }
+  )
+
+  const randomIndex = Math.floor(Math.random() * articles.length);
+
+  const lastObject = articles[randomIndex];
+  
+
+
+  console.log("Last Tech News Obtained: ", lastObject.title, lastObject.description, lastObject.url);
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
+
+    const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
+    
+    const chatGPTResponse = await axios.post(
+        chatGPTApiUrl,
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            { role: 'system', content: 'You are a helpful assistant.' },
+            { role: 'user', content: userMessage },
+          ],
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+          },
+        }
+      );
+        
+    const reply = chatGPTResponse.data.choices[0].message.content;
+      console.log("CHATGPT", reply);
+
+    // const img = req.body.imageUrl; // Assuming the image URL is provided in the request body
+    const { filePath } = await downloadFile(lastObject.image); // Download the image and get the file path
+    const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+    // const tweet = req.body.tweet;
+    const resp = await client.v2.tweet({
+        text: reply + ' ' + lastObject.url,
+        media: { media_ids: [mediaId] }
+    });
+    console.log("Tweeted Successfully", resp);
+
+};
+
+
 ////////// Cron API //////////
 
 cron.schedule('0 21 * * 1-5', async () => {
@@ -189,3 +319,13 @@ cron.schedule('0 21 * * 1-5', async () => {
         // res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
 });
+
+cron.schedule('0 12 * * *', async () => {
+  console.log('Posting to twitter tech news a task every day at 8:00 am 12utc  EST! Twitter!');
+  postTweetTechNews()
+}, null, true, 'America/New_York');
+
+cron.schedule('0 16 * * *', async () => {
+  console.log('Posting to twitter business news a task every day at 12:00 am 16utc  EST! Twitter!');
+  postTweetBusNews()
+}, null, true, 'America/New_York');

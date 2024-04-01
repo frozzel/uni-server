@@ -1,7 +1,7 @@
 const axios = require('axios');
 const FB = require('fb');
 const cron = require('node-cron');
-const { random } = require('lodash');
+
 
 
 ////////// Test API //////////
