@@ -19,6 +19,8 @@ const twitterRouter = require('./routes/twitter.js');
 const facebookRouter = require('./routes/facebook.js');
 const instagramRouter = require('./routes/instagram.js');
 const newsRouter = require('./routes/news.js');
+const linkedinRouter = require('./routes/linkedin.js');
+
 
 /////////////////////////// use routes ///////////////////////////
 app.use('/api/chatgpt', chatgptRouter);
@@ -28,6 +30,7 @@ app.use('/api/twitter', twitterRouter);
 app.use('/api/facebook', facebookRouter);
 app.use('/api/instagram', instagramRouter);
 app.use('/api/news', newsRouter);
+app.use('/api/linkedin', linkedinRouter);
 
 /////////////////////////// start server ///////////////////////////
 const server = require('http').Server(app); // import http
