@@ -254,7 +254,7 @@ postFacebookBusNews = async (req, res) => {
     });
 
 }
-// postFacebookBusNews();
+// postFacebookTechNews();
 // Schedule the Facebook post
 
 cron.schedule('0 23 * * 1-5', () => {
