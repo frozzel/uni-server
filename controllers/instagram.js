@@ -50,7 +50,7 @@ postToInstagram = async (req, res) => {
     const apiKey = process.env.OPENAI_API_KEY;
     const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const userMessage = `Compose a Instagram post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. include @cyrusgroupinnovations and #cyrusgroupinnovations in the post.`;
+    const userMessage = `Compose a Instagram post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post and this link CyrusGroupInnovations.com . Provide only the content of the post as the response. I will provide the image and link to the blog post. include @cyrusgroupinnovations and #cyrusgroupinnovations in the post.`;
 
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
