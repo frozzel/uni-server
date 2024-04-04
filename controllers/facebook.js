@@ -72,7 +72,7 @@ postFacebook = async (req, res) => {
     const apiKey = process.env.OPENAI_API_KEY;
     const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const userMessage = `Compose a Facebook post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
+    const userMessage = `Compose a Facebook post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInnovations . Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
 
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
@@ -144,7 +144,7 @@ postFacebookTechNews = async (req, res) => {
     const apiKey = process.env.OPENAI_API_KEY;
     const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const userMessage = `Compose a Facebook post for this news article with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
+    const userMessage = `Compose a Facebook post for this news article with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInnovations. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
 
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
@@ -214,7 +214,7 @@ postFacebookBusNews = async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
   const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-  const userMessage = `Compose a Facebook post for this news article with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
+  const userMessage = `Compose a Facebook post for this news article with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInnovations. Provide only the content of the post as the response. I will provide the image and link to the blog post.`;
 
   const chatGPTResponse = await axios.post(
       chatGPTApiUrl,
