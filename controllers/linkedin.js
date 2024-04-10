@@ -15,7 +15,7 @@ exports.testApi = (req, res) => {
 
 postLinkedInTechNews = async (req, res) => {
     console.log('Getting Tech News..........')
-    const news = await axios.get(`https://newsapi.org/v2/top-headlines?sources=techcrunch,wired,the-next-web&apiKey=${process.env.NEWS_API_KEY}`);
+    const news = await axios.get(`https://newsapi.org/v2/everything?q=Technology+OR+AI+OR+Crypto+OR+Security+OR+startups+OR+apps&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com&apiKey=${process.env.NEWS_API_KEY}`);
     console.log("News Articles", news.data.articles.length);
 
 
