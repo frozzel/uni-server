@@ -163,7 +163,7 @@ postLinkedInTechNews = async (req, res) => {
 
 postLinkedInBusNews = async (req, res) => {
     console.log('Getting Tech News..........')
-    const news = await axios.get(`https://newsapi.org/v2/everything?q=+small +business&domains=investing.com,fortune.com,seekingalpha.com&pageSize=100&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`);
+    const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29&pageSize=100&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`);
     console.log("News Articles", news.data.articles.length);
 
 
