@@ -27,7 +27,7 @@ exports.chatGPT = async (req, res) => {
         const response = await axios.post(
           chatGPTApiUrl,
           {
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-4o',
             messages: [
               { role: 'system', content: 'You are a helpful assistant.' },
               { role: 'user', content: userMessage },
@@ -66,7 +66,7 @@ exports.dallE = async (req, res) => {
     const response1 = await axios.post(
       chatGPTApiUrl,
       {
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are a helpful assistant.' },
           { role: 'user', content: dalleQuestion },

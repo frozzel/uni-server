@@ -114,7 +114,7 @@ exports.testApi = (req, res) => {
 //         const chatGPTResponse = await axios.post(
 //             chatGPTApiUrl,
 //             {
-//               model: 'gpt-3.5-turbo',
+//               model: 'gpt-4o',
 //               messages: [
 //                 { role: 'system', content: 'You are a helpful assistant.' },
 //                 { role: 'user', content: userMessage },

@@ -79,7 +79,7 @@ postFacebook = async (req, res) => {
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
         {
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4o',
           messages: [
             { role: 'system', content: 'You are a helpful assistant.' },
             { role: 'user', content: userMessage },
@@ -151,7 +151,7 @@ postFacebookTechNews = async (req, res) => {
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
         {
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4o',
           messages: [
             { role: 'system', content: 'You are a helpful assistant.' },
             { role: 'user', content: userMessage },
@@ -221,7 +221,7 @@ postFacebookBusNews = async (req, res) => {
   const chatGPTResponse = await axios.post(
       chatGPTApiUrl,
       {
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'You are a helpful assistant.' },
           { role: 'user', content: userMessage },
@@ -256,7 +256,7 @@ postFacebookBusNews = async (req, res) => {
     });
 
 }
-// 
+// postFacebook();
 // Schedule the Facebook post
 
 cron.schedule('0 23 * * 1-5', () => {

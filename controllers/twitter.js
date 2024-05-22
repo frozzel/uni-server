@@ -80,7 +80,7 @@ exports.postTweet = async (req, res) => {
         const chatGPTResponse = await axios.post(
             chatGPTApiUrl,
             {
-              model: 'gpt-3.5-turbo',
+              model: 'gpt-4o',
               messages: [
                 { role: 'system', content: 'You are a helpful assistant.' },
                 { role: 'user', content: userMessage },
@@ -147,7 +147,7 @@ postTweetTechNews = async (req, res) => {
       const chatGPTResponse = await axios.post(
           chatGPTApiUrl,
           {
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-4o',
             messages: [
               { role: 'system', content: 'You are a helpful assistant.' },
               { role: 'user', content: userMessage },
@@ -211,7 +211,7 @@ postTweetBusNews = async (req, res) => {
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
         {
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4o',
           messages: [
             { role: 'system', content: 'You are a helpful assistant.' },
             { role: 'user', content: userMessage },
@@ -287,7 +287,7 @@ cron.schedule('0 21 * * 1-5', async () => {
         const chatGPTResponse = await axios.post(
             chatGPTApiUrl,
             {
-              model: 'gpt-3.5-turbo',
+              model: 'gpt-4o',
               messages: [
                 { role: 'system', content: 'You are a helpful assistant.' },
                 { role: 'user', content: userMessage },
