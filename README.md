@@ -31,3 +31,31 @@ Example https://www.linkedin.com/developers/tools/oauth/redirect?code=YOU NEED T
 ### Open POstMan, go to linked in collection, gettokken and add the Bearer Token to the Body code section
 
 THis will be the two month auth code needed to post.
+
+## FACEBOOK - INSTAGRAM INSTRUCTIONS
+
+https://developers.facebook.com/docs/facebook-login/guides/access-tokens
+
+https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0
+
+Go To graph API Explorer, Hit Generate Access Token to reauthorize user first, submit the GET request to verify its working. Save Token
+Next Select Page Token and do the same as above now submit with the page token to verify page access. 
+
+###  **** THIS ONLY LAST AN HOUR *****
+{
+  "id": "RANDOIDNUMBER IS HERE",
+  "name": "Cyrus Group Innovations"
+}
+
+### GET LONG LIVE TOken
+
+curl -i -X GET "https://graph.facebook.com/{graph-api-version}/oauth/access_token?  
+    grant_type=fb_exchange_token&          
+    client_id={app-id}&
+    client_secret={app-secret}&
+    fb_exchange_token={your-access-token}" 
+
+Get the api ID and app-secret in the app dashboard and the secret will be under App settings Basic.
+Take the above curl and add the three codes obtained to it in a text editor. copy the curl into your terminal to receive your long live token.
+
+### *** Expires 60 DAYS ***

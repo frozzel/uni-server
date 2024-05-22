@@ -35,6 +35,8 @@ FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
 //       });
 //     };
 
+// postFacebook();// 
+
 postFacebook = async (req, res) => {
 
   // Calculate the date 5 days ago
@@ -254,7 +256,7 @@ postFacebookBusNews = async (req, res) => {
     });
 
 }
-// postFacebookTechNews();
+// 
 // Schedule the Facebook post
 
 cron.schedule('0 23 * * 1-5', () => {
