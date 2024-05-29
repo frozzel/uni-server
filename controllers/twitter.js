@@ -37,6 +37,8 @@ const client = new TwitterApi({
 //         console.error(error);
 //     }
 // };
+
+/// not updated use cron job to post tweets///
 exports.postTweet = async (req, res) => {
     try {
         // Calculate the date 5 days ago
@@ -112,6 +114,8 @@ exports.postTweet = async (req, res) => {
     }
 };
 
+
+/// updated use cron job to post tweets///
 postTweetTechNews = async (req, res) => {
   
     console.log('Getting Tech News..........')
@@ -142,7 +146,7 @@ postTweetTechNews = async (req, res) => {
       const apiKey = process.env.OPENAI_API_KEY;
       const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
   
-      const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
+      const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 250 characters so it fits in a tweet.`;
       
       const chatGPTResponse = await axios.post(
           chatGPTApiUrl,
@@ -165,12 +169,12 @@ postTweetTechNews = async (req, res) => {
         console.log("CHATGPT", reply);
 
       // const img = req.body.imageUrl; // Assuming the image URL is provided in the request body
-      const { filePath } = await downloadFile(lastObject.image); // Download the image and get the file path
-      const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+      // const { filePath } = await downloadFile(lastObject.image); // Download the image and get the file path
+      // const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
       // const tweet = req.body.tweet;
       const resp = await client.v2.tweet({
-          text: reply + ' ' + lastObject.url,
-          media: { media_ids: [mediaId] }
+          text: reply,
+          // media: { media_ids: [mediaId] }
       });
       console.log("Tweeted Successfully", resp);
 
@@ -206,8 +210,8 @@ postTweetBusNews = async (req, res) => {
     const apiKey = process.env.OPENAI_API_KEY;
     const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
-    
+    const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 250 characters so it fits in a tweet.`;
+
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
         {
@@ -229,23 +233,25 @@ postTweetBusNews = async (req, res) => {
       console.log("CHATGPT", reply);
 
     // const img = req.body.imageUrl; // Assuming the image URL is provided in the request body
-    const { filePath } = await downloadFile(lastObject.image); // Download the image and get the file path
-    const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+    // const { filePath } = await downloadFile(lastObject.image); // Download the image and get the file path
+    // const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
     // const tweet = req.body.tweet;
     const resp = await client.v2.tweet({
-        text: reply + ' ' + lastObject.url,
-        media: { media_ids: [mediaId] }
+        text: reply,
+        // media: { media_ids: [mediaId] }
     });
     console.log("Tweeted Successfully", resp);
 
 };
 
 
+// postTweetBusNews()
+
 ////////// Cron API //////////
 
 cron.schedule('0 21 * * 1-5', async () => {
     try {
-        console.log('Running a task every weekday at 9:00 utc 5pm EST! Twitter!');
+        console.log('Posting Blog to Twitter, every weekday at 9:00 utc 5pm EST! 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
         // Calculate the date 5 days ago
         const fiveDaysAgo = new Date();
         fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
@@ -282,8 +288,9 @@ cron.schedule('0 21 * * 1-5', async () => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
     
-        const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
-        
+        // const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
+        const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 230 characters so it fits in a tweet.`;
+
         const chatGPTResponse = await axios.post(
             chatGPTApiUrl,
             {
@@ -305,12 +312,12 @@ cron.schedule('0 21 * * 1-5', async () => {
           console.log("CHATGPT", reply);
 
         // const img = req.body.imageUrl; // Assuming the image URL is provided in the request body
-        const { filePath } = await downloadFile(lastObject.featuredImage); // Download the image and get the file path
-        const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+        // const { filePath } = await downloadFile(lastObject.featuredImage); // Download the image and get the file path
+        // const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
         // const tweet = req.body.tweet;
         const resp = await client.v2.tweet({
-            text: reply + ' ' + lastObject.url,
-            media: { media_ids: [mediaId] }
+            text: reply,
+            // media: { media_ids: [mediaId] }
         });
         // res.json(resp);
         console.log("Tweeted Successfully", resp);
