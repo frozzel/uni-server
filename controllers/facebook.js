@@ -109,7 +109,7 @@ postFacebook = async (req, res) => {
           // res.status(400).json({ error: fbRes || 'Unknown error'});
           return;
         }
-        console.log('Shared successfully: Facebook', fbRes);
+        console.log('Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
         // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
       });
   
@@ -181,7 +181,7 @@ postFacebookTechNews = async (req, res) => {
           // res.status(400).json({ error: fbRes || 'Unknown error'});
           return;
         }
-        console.log('Shared successfully: Facebook', fbRes);
+        console.log('Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
         // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
       });
   
@@ -251,7 +251,7 @@ postFacebookBusNews = async (req, res) => {
         // res.status(400).json({ error: fbRes || 'Unknown error'});
         return;
       }
-      console.log('Shared successfully: Facebook', fbRes);
+      console.log('Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
       // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
     });
 
@@ -260,17 +260,17 @@ postFacebookBusNews = async (req, res) => {
 // Schedule the Facebook post
 
 cron.schedule('0 23 * * 1-5', () => {
-    console.log('Posting to facebook every day at 7PM 23utc');
+    console.log('Posting to facebook every day at 7PM 23utc ⓕⓕⓕⓕⓕ');
     postFacebook();
 }, null, true, 'America/New_York');
 
 
 cron.schedule('0 13 * * *', () => {
-    console.log('Posting Tech News to facebook every day at 9AM 13utc');
+    console.log('Posting Tech News to facebook every day at 9AM 13utc ⓕⓕⓕⓕⓕ');
     postFacebookTechNews();
 } , null, true, 'America/New_York');
 
 cron.schedule('0 17 * * *', () => {
-    console.log('Posting Business News to facebook every day at 1PM 17utc');
+    console.log('Posting Business News to facebook every day at 1PM 17utc ⓕⓕⓕⓕⓕ');
     postFacebookBusNews();
 }, null, true, 'America/New_York');

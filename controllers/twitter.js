@@ -176,7 +176,7 @@ postTweetTechNews = async (req, res) => {
           text: reply,
           // media: { media_ids: [mediaId] }
       });
-      console.log("Tweeted Successfully", resp);
+      console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏𝕏", resp);
 
 };
 
@@ -240,18 +240,18 @@ postTweetBusNews = async (req, res) => {
         text: reply,
         // media: { media_ids: [mediaId] }
     });
-    console.log("Tweeted Successfully", resp);
+    console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏", resp);
 
 };
 
 
-// postTweetBusNews()
+// postTweetTechNews()
 
 ////////// Cron API //////////
 
 cron.schedule('0 21 * * 1-5', async () => {
     try {
-        console.log('Posting Blog to Twitter, every weekday at 9:00 utc 5pm EST! 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
+        console.log('Posting Blog to Twitter 🐥🐥🐥🐥🐥, every weekday at 9:00 utc 5pm EST! 𝕏𝕏𝕏𝕏𝕏');
         // Calculate the date 5 days ago
         const fiveDaysAgo = new Date();
         fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
@@ -320,19 +320,19 @@ cron.schedule('0 21 * * 1-5', async () => {
             // media: { media_ids: [mediaId] }
         });
         // res.json(resp);
-        console.log("Tweeted Successfully", resp);
+        console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏 Twitter", resp);
     } catch (error) {
-        console.error("Twitter Error Failure", error);
+        console.error("Twitter Error Failure 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏 Twitter Failure", error);
         // res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
 });
 
 cron.schedule('0 12 * * *', async () => {
-  console.log('Posting to twitter tech news a task every day at 8:00 am 12utc  EST! Twitter!');
+  console.log('Posting to twitter 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏 tech news a task every day at 8:00 am 12utc  EST! Twitter!');
   postTweetTechNews()
 }, null, true, 'America/New_York');
 
 cron.schedule('0 16 * * *', async () => {
-  console.log('Posting to twitter business news a task every day at 12:00 am 16utc  EST! Twitter!');
+  console.log('Posting to twitter 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏 business news a task every day at 12:00 am 16utc  EST! Twitter!');
   postTweetBusNews()
 }, null, true, 'America/New_York');
