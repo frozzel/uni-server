@@ -146,7 +146,7 @@ postTweetTechNews = async (req, res) => {
       const apiKey = process.env.OPENAI_API_KEY;
       const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
   
-      const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 250 characters so it fits in a tweet.`;
+      const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 220 characters so it fits in a tweet.`;
       
       const chatGPTResponse = await axios.post(
           chatGPTApiUrl,
@@ -210,7 +210,7 @@ postTweetBusNews = async (req, res) => {
     const apiKey = process.env.OPENAI_API_KEY;
     const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 250 characters so it fits in a tweet.`;
+    const userMessage = `Compose a Twitter post for this news article post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 220 characters so it fits in a tweet.`;
 
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
@@ -289,7 +289,7 @@ cron.schedule('0 21 * * 1-5', async () => {
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
     
         // const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags in the post. Provide only the content of the post as the response. I will provide the image and link to the blog post. Keep the post under 230 characters so there is room for me to add the links to photo and article.`;
-        const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 230 characters so it fits in a tweet.`;
+        const userMessage = `Compose a Twitter post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post include this mention @CyrusGroupInv. Provide only the content of the post as the response. The link is '${lastObject.url}'. Keep the post under 220 characters so it fits in a tweet.`;
 
         const chatGPTResponse = await axios.post(
             chatGPTApiUrl,
