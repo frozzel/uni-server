@@ -7,7 +7,7 @@ const {downloadFile} = require('../Utils/download.js');
 ////////// Test API //////////
 
 exports.testApi = (req, res) => {
-    res.send('Hello, Twitter!');
+    res.send('Hello, Twitter! 🐥 𝕏');
 }
 
 ////////// Twitter API //////////

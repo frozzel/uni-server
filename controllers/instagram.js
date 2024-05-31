@@ -5,7 +5,7 @@ const cron = require('node-cron');
 
 ////////// Test API //////////
 exports.testApi = (req, res) => {
-    res.send('Hello, Instagram!');
+    res.send('📸 Hello, Instagram! 📸');
 }
 
 ////////// Post Instagram //////////
@@ -89,14 +89,14 @@ postToInstagram = async (req, res) => {
 
         const photoId = response.id;
 
-        console.log('Photo uploaded successfully: Instagram', photoId);
+        console.log('📸 Photo uploaded successfully: Instagram 📸', photoId);
 
         // Step 2: Publish the photo to Instagram
         FB.api(`/${process.env.IG_ID}/media_publish`, 'POST', {
             creation_id: photoId
         }, function (response) {
             if (!response || response.error) {
-                console.error('Error publishing to Instagram:', response.error);
+                console.error('Error publishing to Instagram: 📸', response.error);
                 return;
             }
 
@@ -109,6 +109,6 @@ postToInstagram = async (req, res) => {
 /////// cron post to instagram ///////
 
 cron.schedule('32 13 * * 1-5', () => {
-    console.log('Posting to Instagram at 8am (12utc)');
+    console.log('Posting to Instagram at 8am (12utc)📸 📸');
     postToInstagram();
 }, null, true, 'America/New_York');

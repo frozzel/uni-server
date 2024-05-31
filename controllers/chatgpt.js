@@ -7,7 +7,7 @@ const {downloadFile} = require('../Utils/download.js');
 
 ////////// Test API //////////
 exports.testApi = (req, res) => {
-    res.send('Hello, World!');
+    res.send('Hello, OpenAi!');
 }
 
 ////////// ChatGPT API //////////
