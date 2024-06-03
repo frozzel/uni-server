@@ -90,7 +90,7 @@ postLinkedInTechNews = async (req, res) => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
       
-        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. I dont need space for the link`;
+        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. And Add the link to the article at the end of the post '${lastObject.url}'`;
   
     const postNow = async () => {
           const chatGPTResponse = await axios.post(
@@ -129,11 +129,11 @@ postLinkedInTechNews = async (req, res) => {
                 "thirdPartyDistributionChannels": []
               }, 
               "content": {
-                  "article": {
-                      "source": lastObject.url,
-                      "thumbnail": imageUrn,
+                  "media": {
+                      // "source": lastObject.url,
+                      "id": imageUrn,
                       "title": lastObject.title,
-                      "description": lastObject.description,
+                      "altText": lastObject.description,
                   }
               },
               "lifecycleState": "PUBLISHED",
@@ -238,7 +238,7 @@ postLinkedInBusNews = async (req, res) => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
       
-        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response.I don't need space for the link`;
+        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. And Add the link to the article at the end of the post '${lastObject.url}'`;
   
     const postNow = async () => {
           const chatGPTResponse = await axios.post(
@@ -277,13 +277,13 @@ postLinkedInBusNews = async (req, res) => {
                 "thirdPartyDistributionChannels": []
               }, 
               "content": {
-                  "article": {
-                      "source": lastObject.url,
-                      "thumbnail": imageUrn,
-                      "title": lastObject.title,
-                      "description": lastObject.description,
-                  }
-              },
+                "media": {
+                    // "source": lastObject.url,
+                    "id": imageUrn,
+                    "title": lastObject.title,
+                    "altText": lastObject.description,
+                }
+            },
               "lifecycleState": "PUBLISHED",
               "isReshareDisabledByAuthor": false
              
@@ -309,10 +309,10 @@ postLinkedInBusNews = async (req, res) => {
     console.log('Post to LinkedIn Completed');
 }
 
-// postLinkedInBusNews();
+// postLinkedInTechNews();
 ////////// LinkedIn Cron Job //////////
 
-cron.schedule('30 18 * * 1-5', async () => {
+cron.schedule('*/1 * * * *', async () => {
     try {
       console.log('Posting to LinkedIn  every weekday at 2:30 PM 18utc');
       // Calculate the date 5 days ago
@@ -401,7 +401,7 @@ cron.schedule('30 18 * * 1-5', async () => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
       
-        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post . Provide only the content of the post as the response. I don't need space for the link`;
+        const userMessage = `Compose a LinkedIn post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post . Provide only the content of the post as the response. And Add the link to the article at the end of the post '${lastObject.url}', and keep the post under 2500 characters.`;
   
     const postNow = async () => {
           const chatGPTResponse = await axios.post(
@@ -440,13 +440,13 @@ cron.schedule('30 18 * * 1-5', async () => {
                 "thirdPartyDistributionChannels": []
               }, 
               "content": {
-                  "article": {
-                      "source": lastObject.url,
-                      "thumbnail": imageUrn,
-                      "title": lastObject.htmlTitle,
-                      "description": lastObject.metaDescription,
-                  }
-              },
+                "media": {
+                    // "source": lastObject.url,
+                    "id": imageUrn,
+                    "title": lastObject.title,
+                    "altText": lastObject.description,
+                }
+            },
               "lifecycleState": "PUBLISHED",
               "isReshareDisabledByAuthor": false
              

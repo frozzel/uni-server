@@ -41,3 +41,20 @@ exports.getNews = async (req, res) => {
         res.json({error: error.message});
     }
 };
+
+/////////// News Sources API //////////
+
+getNewsSources = async (req, res) => {
+    try {
+        console.log('Getting News Sources..........')
+        const newsSources = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_KEY}`);
+        console.log("News Sources", newsSources.data.articles);
+
+        // res.json(newsSources);
+    } 
+    catch (error) {
+        console.error(error);
+        // res.json({error: error});
+    }
+}
+// getNewsSources();
