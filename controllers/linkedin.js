@@ -312,7 +312,7 @@ postLinkedInBusNews = async (req, res) => {
 // postLinkedInTechNews();
 ////////// LinkedIn Cron Job //////////
 
-cron.schedule('*/1 * * * *', async () => {
+cron.schedule('30 18 * * 1-5', async () => {
     try {
       console.log('Posting to LinkedIn  every weekday at 2:30 PM 18utc');
       // Calculate the date 5 days ago
