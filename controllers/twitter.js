@@ -119,7 +119,7 @@ exports.postTweet = async (req, res) => {
 postTweetTechNews = async (req, res) => {
   
     console.log('Getting Tech News..........')
-    const news = await axios.get(`https://newsapi.org/v2/everything?q=Technology+OR+AI+OR+Crypto+OR+Security+OR+startups+OR+apps&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com&apiKey=${process.env.NEWS_API_KEY}`);
+    const news = await axios.get(`https://newsapi.org/v2/everything?q=Technology+OR+AI+OR+Crypto+OR+Security+OR+startups+OR+apps&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
     console.log("News Articles", news.data.articles.length);
 
 
@@ -183,7 +183,7 @@ postTweetTechNews = async (req, res) => {
 postTweetBusNews = async (req, res) => {
   
   console.log('Getting Tech News..........')
-  const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29+NOT%28climate+OR+trump+OR+biden+OR+DEI+OR+diversity+OR+Israel+OR+palestine+OR+environment%29&pageSize=100&sortBy=relevancy&apiKey=${process.env.NEWS_API_KEY}`);
+  const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29+NOT%28climate+OR+trump+OR+biden+OR+DEI+OR+diversity+OR+Israel+OR+palestine+OR+environment%29&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
   console.log("News Articles", news.data.articles.length);
 
 
@@ -245,7 +245,7 @@ postTweetBusNews = async (req, res) => {
 };
 
 
-// postTweetTechNews()
+// postTweetBusNews()
 
 ////////// Cron API //////////
 
