@@ -90,7 +90,7 @@ postLinkedInTechNews = async (req, res) => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
       
-        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. And Add the link to the article at the end of the post '${lastObject.url}'`;
+        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response And Add the link to the article at the end of the post '${lastObject.url}', and keep the post under 2500 characters.`;
   
     const postNow = async () => {
           const chatGPTResponse = await axios.post(
@@ -238,7 +238,7 @@ postLinkedInBusNews = async (req, res) => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
       
-        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response. And Add the link to the article at the end of the post '${lastObject.url}'`;
+        const userMessage = `Compose a LinkedIn blog post with the title '${lastObject.title}' discussing '${lastObject.description}' and the source'${lastObject.source}'. Please include relevant hashtags and mentions in the post. Provide only the content of the post as the response And Add the link to the article at the end of the post '${lastObject.url}', and keep the post under 2500 characters.`;
   
     const postNow = async () => {
           const chatGPTResponse = await axios.post(
@@ -309,7 +309,7 @@ postLinkedInBusNews = async (req, res) => {
     console.log('Post to LinkedIn Completed');
 }
 
-// postLinkedInTechNews();
+postLinkedInTechNews();
 ////////// LinkedIn Cron Job //////////
 
 cron.schedule('30 18 * * 1-5', async () => {
