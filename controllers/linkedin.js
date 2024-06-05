@@ -309,7 +309,7 @@ postLinkedInBusNews = async (req, res) => {
     console.log('Post to LinkedIn Completed');
 }
 
-postLinkedInTechNews();
+// postLinkedInTechNews();
 ////////// LinkedIn Cron Job //////////
 
 cron.schedule('30 18 * * 1-5', async () => {
