@@ -2,6 +2,13 @@ const axios = require('axios');
 const fs = require('fs');
 const { exec } = require('child_process');
 const {downloadFile} = require('../Utils/download.js');
+const OpenAI = require('openai');
+const { createReadStream } = require('fs');
+const path = require('path');
+const FormData = require('form-data');
+
+
+
 
 
 
@@ -62,7 +69,8 @@ exports.getInfo = async (req, res) => {
 
 const linkToBlogPost = 'https://cyrusgroupinnovations.com/blog/boosting-small-business-content-creation-with-ai';
 // const linkToImage = 'https://45070224.fs1.hubspotusercontent-na1.net/hubfs/45070224/business%20documents%20on%20office%20table%20with%20smart%20phone%20and%20digital%20tablet%20and%20graph%20financial%20with%20social%20network%20diagram%20and%20man%20working%20in%20the%20background.jpeg';
-const linkToImage = "/Users/frozzel/Documents/BootCampGT/uni-server/controllers/crm-statistics.jpg";
+// const linkToImage = "/Users/frozzel/Documents/BootCampGT/uni-server/downloaded-image.png";
+const linkToImage = "https://oaidalleapiprodscus.blob.core.windows.net/private/org-maWxLhs60s3ZoF5kEnTcLytn/user-6IZ8GvCSWHdHsJdlu7U685P9/img-kjbcqym8NErD4NyQchqZOdEH.png?st=2024-06-05T18%3A32%3A13Z&se=2024-06-05T20%3A32%3A13Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-05T17%3A17%3A31Z&ske=2024-06-06T17%3A17%3A31Z&sks=b&skv=2023-11-03&sig=7p9FgNqES1QLeK7sbCMK6dpyZ9E8Jud8eXhv7WHuR/c%3D";
 
 
 // Function to download image from URL
@@ -335,3 +343,181 @@ exports.aiPostToLinkedIn = async (req, res) => {
   res.status(500).json({ error: error.response.data });
 }
 }
+////////// ChatGPT API //////////
+
+const apiKey = process.env.OPENAI_API_KEY;
+const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
+
+///// upload image to hubspot /////
+
+uploadImage = async (req, res) => {
+  try {
+    const openai = new OpenAI({ apiKey: apiKey });
+
+    const {userMessage}  = {
+      "userMessage":  "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites"
+    
+    
+    };
+    // console.log(req.body)
+    if (!userMessage) {
+      return res.status(400).json({ error: 'User message is required.' });
+    }
+
+    const dalleQuestion = `Create a dalle 3 prompt to create an image for this blog topic: ${userMessage}. Don't add text to the image in any way`;
+    console.log(dalleQuestion);
+
+    const response1 = await axios.post(
+      chatGPTApiUrl,
+      {
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: dalleQuestion },
+        ],
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      }
+    );
+      
+    const reply = response1.data.choices[0].message.content;
+    console.log(reply);
+
+    // Generate an image using the DALL-E model
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: reply,
+      n: 1,
+      size: "1792x1024",
+    });
+    image_url = response.data[0].url;
+    console.log(response)
+    
+
+    // Save the image to a file
+    const {filePath} = await downloadFile(image_url, 'dallE');
+    console.log('Image generated successfully!');
+    console.log("Image URL", image_url);
+
+ 
+    const formData = new FormData();
+    formData.append('file', createReadStream(filePath), path.basename(filePath));
+    formData.append('folderPath', '/images'); // Set the folderPath as per HubSpot example
+    // formData.append('fileName', 'downloaded-image.png'); // Set the fileName as per HubSpot example
+    // formData.append('fileType', 'image/png'); // Set the fileType as per HubSpot example
+    // formData.append('access', 'PUBLIC_INDEXABLE'); // Set the access field to PUBLIC_INDEXABLE directly in the form data
+    formData.append('options',`{"access":"PUBLIC_INDEXABLE"}`); // Set the access field to PUBLIC_INDEXABLE directly in the form data
+
+    const {ImportFromUrlInput} = { folderPath: '/images', access: "PUBLIC_INDEXABLE",  url: image_url, };
+
+    // console.log("Form Data", formData);
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://api.hubapi.com/api/filemanager/api/v3/files/upload',
+      headers: {
+      'Authorization': `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
+      ...formData.getHeaders()
+      },
+      data : formData
+      };
+      
+
+    const resp = await axios.request(config);
+      // 'https://api.hubapi.com/filemanager/api/v3/files/upload',
+      // {headers: {
+      //   "Authorization": `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
+      //   "folderPath": '/images', 
+      //   "access": "PUBLIC_INDEXABLE",  
+      //   "url": image_url,
+      //   'Content-Type': 'application/json',
+      // },}
+    // );
+
+    console.log('Image uploaded to HubSpot:', resp.data.objects[0].url);
+    // res.json({ url: resp.data.objects[0].url });
+  } catch (error) {
+    console.error('Error uploading image to HubSpot:', error);
+    // res.status(500).json({ error: error.message });
+  }
+};
+
+// uploadImage();
+
+
+///// post to hubspot blog /////
+createBlogPost = async (req, res) => {
+  try {
+    const HUBSPOT_BLOG_POST_URL = 'https://api.hubapi.com/cms/v3/blogs/posts';
+
+    // Extract blog data from the request body
+    // const { title, content, slug, tags, authorId, blogId, metaTitle, metaDescription, featuredImage } = req.body;
+
+    // Prepare the data to be sent to HubSpot
+    const blogPostData = {
+      name: "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites",
+      postBody: "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites Body",
+      slug: "blog/efficient-inventory-tracking-strategies-with-shopify22",
+      publishImmediately: true,
+      // tagIds: ["AI Integrations", "Web development",],
+      blogAuthorId: 158140284837,
+      // blog_id: blogId,
+      state: 'published', // or 'draft' if you don't want to publish it immediately
+      metaTitle: "Some Meta Title",
+      metaDescription: "Some Meta Description",
+      featuredImage: "https://cyrusgroupinnovations.com/hubfs/CrmIntegrations.001-Jun-05-2024-02-56-40-4390-AM.png",
+      contentGroupId: 158129258575,
+    };
+
+    // Send a POST request to HubSpot
+    const response = await axios.post(HUBSPOT_BLOG_POST_URL, blogPostData, {
+      headers: {
+        'Content-Type': 'application/json',
+         'Authorization': `Bearer ${process.env.PRIVATE_APP_ACCESS}`
+      }
+    });
+
+    // Handle the response
+    if (response.status === 201) {
+      console.log('Blog post created successfully:', response.data);
+      // res.status(201).json({ message: 'Blog post created successfully', data: response.data });
+    } else {
+      console.log('Failed to create blog post:', response.data);
+      // res.status(response.status).json({ message: 'Failed to create blog post', error: response.data });
+    }
+  } catch (error) {
+    console.error('Error creating blog post:', error);
+    // res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+};
+
+// createBlogPost();
+
+const HUBSPOT_BLOG_AUTHORS_URL = 'https://api.hubapi.com/cms/v3/blogs/authors';
+
+/////// Function to get the author ID by name //////
+const getAuthorIdByName = async (authorName) => {
+  try {
+    const response = await axios.get(HUBSPOT_BLOG_AUTHORS_URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.PRIVATE_APP_ACCESS}`
+      }
+    });
+
+    const authors = response.data.results;
+    const author = authors.find(a => a.fullName.toLowerCase() === authorName.toLowerCase());
+    console.log('Author:', author);
+    console.log('Author ID:', author ? author.id : null);
+    return author ? author.id : null;
+  } catch (error) {
+    console.error('Error fetching author ID:', error);
+    throw new Error('Could not fetch author ID');
+  }
+};
+
+// getAuthorIdByName('Cyrus Group');
