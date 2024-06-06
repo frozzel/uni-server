@@ -55,7 +55,7 @@ exports.getInfo = async (req, res) => {
                 // Get the last object in the array
                 const lastObject = data2[data2.length - 1];
       
-        res.json(lastObject);  
+        res.json(data);  
     } catch (error) {
         console.error(error);
        
@@ -463,15 +463,55 @@ createBlogPost = async (req, res) => {
       postBody: "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites Body",
       slug: "blog/efficient-inventory-tracking-strategies-with-shopify22",
       publishImmediately: true,
-      // tagIds: ["AI Integrations", "Web development",],
+      tagIds: [159421975454, 165135476399],
       blogAuthorId: 158140284837,
-      // blog_id: blogId,
-      state: 'published', // or 'draft' if you don't want to publish it immediately
+      state: 'PUBLISHED', // or 'draft' if you don't want to publish it immediately
       metaTitle: "Some Meta Title",
       metaDescription: "Some Meta Description",
       featuredImage: "https://cyrusgroupinnovations.com/hubfs/CrmIntegrations.001-Jun-05-2024-02-56-40-4390-AM.png",
       contentGroupId: 158129258575,
-    };
+      publishImmediately: true,
+      createdById: "63468404",
+      language: "en",
+      htmlTitle: "string",
+      publicAccessRulesEnabled: true,
+      widgetContainers: {},
+		  widgets: {
+			blog_subscribe: {
+				body: {
+					description: "<p>&nbsp;</p>\n<p><span style=\"color: #ffffff;\">&nbsp;</span></p>\n<p><span>Stay updated on the newest technology news to enhance and optimize your small business requirements!</span></p>\n<p>&nbsp;</p>\n<div class=\"hs-embed-wrapper\"><div class=\"hs-embed-content-wrapper\"><div class=\"hs-cta-embed hs-cta-simple-placeholder hs-cta-embed-157859368197\" style=\"max-width: 100%; max-height: 100%; width: 195px; height: 46.6875px;\" data-hubspot-wrapper-cta-id=\"157859368197\"><a href=\"https://cta-service-cms2.hubspot.com/web-interactives/public/v1/track/redirect?encryptedPayload=AVxigLKlTPk3k9gDdPlDJ81HuMZcrj6h%2BH2sk9%2BheL0pT0js712Swb3V0%2FrPOEPpP7a6iEofszfd0PcUm4xCQjKfGsW5g6t3Ogzz01EqMPQBfyh0RHz4L6T%2FM9s5owElh%2FJ0%2BAztZEFINGYjLDFsL%2F1Xn6qz4A%3D%3D&amp;webInteractiveContentId=157859368197&amp;portalId=45070224\" target=\"_blank\" rel=\"noopener\" crossorigin=\"anonymous\"> <img alt=\"Learn More\" loading=\"lazy\" src=\"https://no-cache.hubspot.com/cta/default/45070224/interactive-157859368197.png\" style=\"height: 100%; width: 100%; object-fit: fill;\" onerror=\"this.style.display='none'\" data-mce-paste=\"true\"> </a></div></div></div>\n<p style=\"text-align: center;\"><span>&nbsp;</span></p>",
+					style: {
+						background: {
+							background_color: {
+								color: "#ff6cab",
+								opacity: 10
+							}
+						},
+						cta_content: {
+							overline_font: {
+								color: "#000000"
+							},
+							title_font: {
+								color: "#000000"
+							}
+						},
+						custom_style: true
+					}
+				},
+				child_css: {},
+				css: {},
+				id: "blog_subscribe",
+				label: "Blog subscribe",
+				module_id: 154798881064,
+				name: "blog_subscribe",
+				order: 8,
+				styles: {},
+				type: "module"
+			}
+		}
+
+
+    }
 
     // Send a POST request to HubSpot
     const response = await axios.post(HUBSPOT_BLOG_POST_URL, blogPostData, {
