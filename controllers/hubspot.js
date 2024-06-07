@@ -6,13 +6,8 @@ const OpenAI = require('openai');
 const { createReadStream } = require('fs');
 const path = require('path');
 const FormData = require('form-data');
-var slugify = require('slugify')
-
-
-
-
-
-
+const slugify = require('slugify')
+const cron = require('node-cron');
 
 ////////// Test API //////////
 exports.testApi = (req, res) => {
@@ -746,4 +741,4 @@ const getAuthorIdByName = async (authorName) => {
 cron.schedule('0 7 * * *', async () => {
   console.log('Running cron job to create a HubSpot blog post... 3AM EST, 7AM UTC');
   createBlogPost();
-});
+}, null, true, 'America/New_York');
