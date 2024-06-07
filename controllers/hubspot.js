@@ -6,6 +6,8 @@ const OpenAI = require('openai');
 const { createReadStream } = require('fs');
 const path = require('path');
 const FormData = require('form-data');
+var slugify = require('slugify')
+
 
 
 
@@ -451,88 +453,150 @@ uploadImage = async (req, res) => {
 
 ///// post to hubspot blog /////
 createBlogPost = async (req, res) => {
-  try {
-    const HUBSPOT_BLOG_POST_URL = 'https://api.hubapi.com/cms/v3/blogs/posts';
 
-    // Extract blog data from the request body
-    // const { title, content, slug, tags, authorId, blogId, metaTitle, metaDescription, featuredImage } = req.body;
+  console.log("🤖🤖🤖🤖🤖 Creating Blog Post HubSpot 🤖🤖🤖🤖🤖🤖🤖");
+  ///// Global Variables ////////
 
-    // Prepare the data to be sent to HubSpot
-    const blogPostData = {
-      name: "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites",
-      postBody: "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites Body",
-      slug: "blog/efficient-inventory-tracking-strategies-with-shopify22",
-      publishImmediately: true,
-      tagIds: [159421975454, 165135476399],
-      blogAuthorId: 158140284837,
-      state: 'PUBLISHED', // or 'draft' if you don't want to publish it immediately
-      metaTitle: "Some Meta Title",
-      metaDescription: "Some Meta Description",
-      featuredImage: "https://cyrusgroupinnovations.com/hubfs/CrmIntegrations.001-Jun-05-2024-02-56-40-4390-AM.png",
-      contentGroupId: 158129258575,
-      publishImmediately: true,
-      createdById: "63468404",
-      language: "en",
-      htmlTitle: "string",
-      publicAccessRulesEnabled: true,
-      widgetContainers: {},
-		  widgets: {
-			blog_subscribe: {
-				body: {
-					description: "<p>&nbsp;</p>\n<p><span style=\"color: #ffffff;\">&nbsp;</span></p>\n<p><span>Stay updated on the newest technology news to enhance and optimize your small business requirements!</span></p>\n<p>&nbsp;</p>\n<div class=\"hs-embed-wrapper\"><div class=\"hs-embed-content-wrapper\"><div class=\"hs-cta-embed hs-cta-simple-placeholder hs-cta-embed-157859368197\" style=\"max-width: 100%; max-height: 100%; width: 195px; height: 46.6875px;\" data-hubspot-wrapper-cta-id=\"157859368197\"><a href=\"https://cta-service-cms2.hubspot.com/web-interactives/public/v1/track/redirect?encryptedPayload=AVxigLKlTPk3k9gDdPlDJ81HuMZcrj6h%2BH2sk9%2BheL0pT0js712Swb3V0%2FrPOEPpP7a6iEofszfd0PcUm4xCQjKfGsW5g6t3Ogzz01EqMPQBfyh0RHz4L6T%2FM9s5owElh%2FJ0%2BAztZEFINGYjLDFsL%2F1Xn6qz4A%3D%3D&amp;webInteractiveContentId=157859368197&amp;portalId=45070224\" target=\"_blank\" rel=\"noopener\" crossorigin=\"anonymous\"> <img alt=\"Learn More\" loading=\"lazy\" src=\"https://no-cache.hubspot.com/cta/default/45070224/interactive-157859368197.png\" style=\"height: 100%; width: 100%; object-fit: fill;\" onerror=\"this.style.display='none'\" data-mce-paste=\"true\"> </a></div></div></div>\n<p style=\"text-align: center;\"><span>&nbsp;</span></p>",
-					style: {
-						background: {
-							background_color: {
-								color: "#ff6cab",
-								opacity: 10
-							}
-						},
-						cta_content: {
-							overline_font: {
-								color: "#000000"
-							},
-							title_font: {
-								color: "#000000"
-							}
-						},
-						custom_style: true
-					}
-				},
-				child_css: {},
-				css: {},
-				id: "blog_subscribe",
-				label: "Blog subscribe",
-				module_id: 154798881064,
-				name: "blog_subscribe",
-				order: 8,
-				styles: {},
-				type: "module"
-			}
-		}
+  const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
 
-    }
 
-    // Send a POST request to HubSpot
-    const response = await axios.post(HUBSPOT_BLOG_POST_URL, blogPostData, {
-      headers: {
-        'Content-Type': 'application/json',
-         'Authorization': `Bearer ${process.env.PRIVATE_APP_ACCESS}`
+  /////// Get Blog Topic Randomly ///////
+  const topic = ["Web Development", "AI integrations like chatGpt bots, HubSpot AI, AI content creation, AI powered google ads", "E-commerce integration like Shopify or Payment Processing like Stripe", "SEO optimization, google analytics, and google ads", "marketing integrations with popular CRMs, google analytics, sms, and email marketing, and automated content creation with ai", "CRM integrations like salesforce, HubSpot, MailChimp, Brevo"]
+  const randomTopic = topic[Math.floor(Math.random() * topic.length)];
+
+  console.log("Random Topic:",randomTopic);
+
+   /////// Assign Tag Ids based on Topic //////
+   let tagIds = [];
+
+   if (randomTopic === "Web Development") {
+       tagIds.push(165135476399);
+   } else if (randomTopic === "AI integrations like chatGpt bots, HubSpot AI, AI content creation, AI powered google ads") {
+       tagIds.push(158146563347);
+   } else if (randomTopic === "E-commerce integration like Shopify or Payment Processing like Stripe") {
+       tagIds.push(159421975454);
+   } else if (randomTopic === "SEO optimization, google analytics, and google ads") {
+       tagIds.push(160263059017);
+   } else if (randomTopic === "marketing integrations with popular CRMs, google analytics, sms, and email marketing, and automated content creation with ai") {
+       tagIds.push(158429568113);
+   } else if (randomTopic === "CRM integrations like salesforce, HubSpot, MailChimp, Brevo") {
+       tagIds.push(160425892926);
+   }
+   
+   // Example usage:
+   console.log( "Tag Ids:", tagIds); // Output will depend on the value of randomTopic
+
+
+      /////// Get Blog Title from ChatGPT //////
+
+  const getBlogTitle = await axios.post(chatGPTApiUrl, {
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: `Create a blog title for my web development company that focuses on one of these'${randomTopic}', respond with just text no quotes and only on one topic` },
+        ],
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
       }
-    });
 
-    // Handle the response
-    if (response.status === 201) {
-      console.log('Blog post created successfully:', response.data);
-      // res.status(201).json({ message: 'Blog post created successfully', data: response.data });
-    } else {
-      console.log('Failed to create blog post:', response.data);
-      // res.status(response.status).json({ message: 'Failed to create blog post', error: response.data });
-    }
-  } catch (error) {
-    console.error('Error creating blog post:', error);
-    // res.status(500).json({ message: 'Internal server error', error: error.message });
-  }
+      );
+      
+      console.log("Blog Title Response:", getBlogTitle.data.choices[0].message);
+      const blogTitle = getBlogTitle.data.choices[0].message.content;
+
+      console.log("Blog Title:", blogTitle);
+
+      /////// Create Slug from Blog Title //////
+
+      const slug = slugify(blogTitle);
+
+      console.log("Slug:", slug);
+
+      /////// Get Blog Description from ChatGPT //////
+
+  // try {
+    
+
+  //   const blogPostData = {
+  //     name: blogTitle,
+  //     postBody: "The Rise of Conversational Interfaces: Designing AI-Powered Chatbots for Websites Body",
+  //     slug: slug,
+  //     publishImmediately: true,
+  //     tagIds: [159421975454, 165135476399],
+  //     blogAuthorId: 158140284837,
+  //     state: 'PUBLISHED', // or 'draft' if you don't want to publish it immediately
+  //     metaTitle: "Some Meta Title",
+  //     metaDescription: "Some Meta Description",
+  //     featuredImage: "https://cyrusgroupinnovations.com/hubfs/CrmIntegrations.001-Jun-05-2024-02-56-40-4390-AM.png",
+  //     contentGroupId: 158129258575,
+  //     publishImmediately: true,
+  //     createdById: "63468404",
+  //     language: "en",
+  //     htmlTitle: "string",
+  //     publicAccessRulesEnabled: true,
+  //     widgetContainers: {},
+	// 	  widgets: {
+	// 		blog_subscribe: {
+	// 			body: {
+	// 				description: "<p>&nbsp;</p>\n<p><span style=\"color: #ffffff;\">&nbsp;</span></p>\n<p><span>Stay updated on the newest technology news to enhance and optimize your small business requirements!</span></p>\n<p>&nbsp;</p>\n<div class=\"hs-embed-wrapper\"><div class=\"hs-embed-content-wrapper\"><div class=\"hs-cta-embed hs-cta-simple-placeholder hs-cta-embed-157859368197\" style=\"max-width: 100%; max-height: 100%; width: 195px; height: 46.6875px;\" data-hubspot-wrapper-cta-id=\"157859368197\"><a href=\"https://cta-service-cms2.hubspot.com/web-interactives/public/v1/track/redirect?encryptedPayload=AVxigLKlTPk3k9gDdPlDJ81HuMZcrj6h%2BH2sk9%2BheL0pT0js712Swb3V0%2FrPOEPpP7a6iEofszfd0PcUm4xCQjKfGsW5g6t3Ogzz01EqMPQBfyh0RHz4L6T%2FM9s5owElh%2FJ0%2BAztZEFINGYjLDFsL%2F1Xn6qz4A%3D%3D&amp;webInteractiveContentId=157859368197&amp;portalId=45070224\" target=\"_blank\" rel=\"noopener\" crossorigin=\"anonymous\"> <img alt=\"Learn More\" loading=\"lazy\" src=\"https://no-cache.hubspot.com/cta/default/45070224/interactive-157859368197.png\" style=\"height: 100%; width: 100%; object-fit: fill;\" onerror=\"this.style.display='none'\" data-mce-paste=\"true\"> </a></div></div></div>\n<p style=\"text-align: center;\"><span>&nbsp;</span></p>",
+	// 				style: {
+	// 					background: {
+	// 						background_color: {
+	// 							color: "#ff6cab",
+	// 							opacity: 10
+	// 						}
+	// 					},
+	// 					cta_content: {
+	// 						overline_font: {
+	// 							color: "#000000"
+	// 						},
+	// 						title_font: {
+	// 							color: "#000000"
+	// 						}
+	// 					},
+	// 					custom_style: true
+	// 				}
+	// 			},
+	// 			child_css: {},
+	// 			css: {},
+	// 			id: "blog_subscribe",
+	// 			label: "Blog subscribe",
+	// 			module_id: 154798881064,
+	// 			name: "blog_subscribe",
+	// 			order: 8,
+	// 			styles: {},
+	// 			type: "module"
+	// 		}
+	// 	}
+
+
+  //   }
+
+  //   // Send a POST request to HubSpot
+  //   const response = await axios.post('https://api.hubapi.com/cms/v3/blogs/posts', blogPostData, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //        'Authorization': `Bearer ${process.env.PRIVATE_APP_ACCESS}`
+  //     }
+  //   });
+
+  //   // Handle the response
+  //   if (response.status === 201) {
+  //     console.log('Blog post created successfully:', response.data);
+  //     // res.status(201).json({ message: 'Blog post created successfully', data: response.data });
+  //   } else {
+  //     console.log('Failed to create blog post:', response.data);
+  //     // res.status(response.status).json({ message: 'Failed to create blog post', error: response.data });
+  //   }
+  // } catch (error) {
+  //   console.error('Error creating blog post:', error);
+  //   // res.status(500).json({ message: 'Internal server error', error: error.message });
+  // }
 };
 
 // createBlogPost();
