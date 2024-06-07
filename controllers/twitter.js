@@ -249,7 +249,7 @@ postTweetBusNews = async (req, res) => {
 
 ////////// Cron API //////////
 
-cron.schedule('0 21 * * 1-5', async () => {
+cron.schedule('0 21 * * *', async () => {
     try {
         console.log('Posting Blog to Twitter 🐥🐥🐥🐥🐥, every weekday at 9:00 utc 5pm EST! 𝕏𝕏𝕏𝕏𝕏');
         // Calculate the date 5 days ago

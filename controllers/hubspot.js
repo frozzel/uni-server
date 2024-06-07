@@ -738,3 +738,12 @@ const getAuthorIdByName = async (authorName) => {
 };
 
 // getAuthorIdByName('Cyrus Group');
+
+
+
+/////// Cron Scheduler For HubSpot Blog Post //////
+
+cron.schedule('0 7 * * *', async () => {
+  console.log('Running cron job to create a HubSpot blog post... 3AM EST, 7AM UTC');
+  await createBlogPost();
+});

@@ -259,7 +259,7 @@ postFacebookBusNews = async (req, res) => {
 // postFacebookBusNews();
 // Schedule the Facebook post
 
-cron.schedule('0 23 * * 1-5', () => {
+cron.schedule('0 23 * * *', () => {
     console.log('Posting to facebook every day at 7PM 23utc ⓕⓕⓕⓕⓕ');
     postFacebook();
 }, null, true, 'America/New_York');
