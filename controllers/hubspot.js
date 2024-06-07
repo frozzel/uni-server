@@ -745,5 +745,5 @@ const getAuthorIdByName = async (authorName) => {
 
 cron.schedule('0 7 * * *', async () => {
   console.log('Running cron job to create a HubSpot blog post... 3AM EST, 7AM UTC');
-  await createBlogPost();
+  createBlogPost();
 });
