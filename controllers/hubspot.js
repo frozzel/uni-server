@@ -893,7 +893,7 @@ createBlogPost = async (req, res) => {
   }
 };
 
-createBlogPost();
+// createBlogPost();
 
 const HUBSPOT_BLOG_AUTHORS_URL = 'https://api.hubapi.com/cms/v3/blogs/authors';
 
