@@ -447,6 +447,152 @@ uploadImage = async (req, res) => {
 
 
 ///// post to hubspot blog /////
+
+const webDevTopics = [
+  "Top Web Development Trends in 2024",
+  "How to Choose the Right Web Development Framework for Your Project",
+  "Essential Skills Every Web Developer Should Have in 2024",
+  "The Importance of Responsive Design in 2024",
+  "A Beginner's Guide to Progressive Web Apps (PWAs)",
+  "How to Optimize Your Website for Speed and Performance",
+  "The Role of Artificial Intelligence in Modern Web Development",
+  "Best Practices for Ensuring Website Security",
+  "Case Study: Transforming a Client’s Website with Modern Web Technologies",
+  "Understanding the Basics of SEO for Web Developers",
+  "The Future of E-Commerce Websites: What to Expect in the Next 5 Years",
+  "How to Create Accessible Websites for All Users",
+  "Integrating Third-Party APIs: Benefits and Challenges",
+  "The Impact of 5G on Web Development",
+  "Building a Scalable Web Application: Key Considerations",
+  "Top 10 Tools for Efficient Web Development in 2024",
+  "How to Conduct a Website Audit: A Step-by-Step Guide",
+  "Why Content Management Systems (CMS) are Essential for Modern Websites",
+  "Creating Engaging User Experiences: Tips and Tricks",
+  "The Benefits of Using Serverless Architecture in Web Development"
+];
+
+const stripeTopics = [
+  "Understanding Payment Gateways: Stripe vs. PayPal",
+  "How to Integrate Stripe with Shopify: A Step-by-Step Guide",
+  "Top 5 Payment Processing Solutions for E-Commerce Businesses",
+  "The Future of Payment Processing: Trends to Watch in 2024",
+  "How to Optimize Your Checkout Process for Higher Conversions",
+  "Security Best Practices for Payment Processing in E-Commerce",
+  "Stripe's New Features: What They Mean for Your E-Commerce Business",
+  "Integrating Multiple Payment Gateways: Benefits and Challenges",
+  "How to Set Up Recurring Payments with Stripe",
+  "Maximizing Sales with Shopify’s Built-In Payment Processing Tools",
+  "Case Study: Successful E-Commerce Integrations with Stripe",
+  "The Role of Mobile Payments in E-Commerce: Adapting to a Mobile-First World",
+  "Shopify and Stripe: Enhancing the Customer Experience",
+  "Building a Scalable Payment Infrastructure for Your Online Store",
+  "Understanding and Reducing Payment Processing Fees",
+  "The Importance of Multi-Currency Support in E-Commerce",
+  "Top Plugins for Enhancing Payment Processing on Shopify",
+  "Customer Trust and Payment Processing: Building Confidence at Checkout",
+  "How to Handle Payment Disputes and Chargebacks Effectively",
+  "Setting Up International Payment Processing with Stripe"
+];
+
+const seoTopics = [
+
+    "Top 10 SEO Trends for 2024: Stay Ahead of the Curve",
+    "How to Perform a Comprehensive SEO Audit: Step-by-Step Guide",
+    "The Ultimate Guide to On-Page SEO: Best Practices and Techniques",
+    "Understanding Off-Page SEO: Strategies to Boost Your Website's Authority",
+    "SEO for Beginners: A Complete Guide to Getting Started",
+    "Local SEO Strategies: How to Optimize Your Website for Local Search",
+    "The Role of Content in SEO: How to Create SEO-Friendly Content",
+    "Technical SEO: The Importance of Site Speed, Mobile-Friendliness, and More",
+    "Voice Search Optimization: Preparing Your Website for the Future",
+    "How to Use Schema Markup for Better SEO",
+    "Google Analytics 4: What's New and How to Use It",
+    "Understanding Key Metrics in Google Analytics: A Beginner's Guide",
+    "How to Set Up Goals and Conversions in Google Analytics",
+    "Advanced Google Analytics: Custom Reports, Segments, and Dashboards",
+    "Google Analytics for E-commerce: Tracking and Optimizing Sales",
+    "How to Use Google Analytics to Improve Your Website's User Experience",
+    "Demystifying Google Analytics: Common Misconceptions and How to Avoid Them",
+    "Tracking Multi-Channel Funnels in Google Analytics",
+    "Using Google Analytics to Track and Improve Your SEO Performance",
+    "How to Integrate Google Analytics with Google Ads for Better Campaign Insights",
+
+   
+    "Google Ads 101: A Beginner's Guide to PPC Advertising",
+    "How to Create Effective Google Ads Campaigns: Best Practices",
+    "Understanding Google Ads Quality Score: How to Improve Your Ads",
+    "The Importance of Keyword Research in Google Ads",
+    "Remarketing with Google Ads: Strategies to Re-Engage Visitors",
+    "A/B Testing in Google Ads: How to Optimize Your Ad Performance",
+    "Budgeting for Google Ads: How to Maximize Your ROI",
+    "The Role of Ad Extensions in Google Ads: Types and Benefits",
+    "How to Use Google Ads Keyword Planner for Better Campaigns",
+    "Common Google Ads Mistakes and How to Avoid Them"
+];
+
+const aiTopics = [
+  "How ChatGPT Bots are Revolutionizing Customer Service",
+  "HubSpot AI: Transforming Your Marketing Automation",
+  "The Future of Content Creation: AI-Powered Tools and Techniques",
+  "Boosting Ad Campaigns with AI-Powered Google Ads",
+  "Integrating ChatGPT with Your Website: A Step-by-Step Guide",
+  "Case Studies: Businesses Thriving with AI Integrations",
+  "The Role of AI in Personalizing Customer Experiences",
+  "Top AI Tools for Web Developers in 2024",
+  "How to Use AI for Effective Lead Generation and Management",
+  "Improving SEO with AI: Techniques and Tools",
+  "The Ethical Implications of AI in Web Development",
+  "AI-Powered Analytics: Making Data-Driven Decisions",
+  "The Intersection of AI and UX Design: What You Need to Know",
+  "Automating Routine Tasks with AI: Increasing Efficiency in Web Development",
+  "Building Smarter Websites: The Role of AI in Web Development",
+  "ChatGPT vs. Traditional Chatbots: Which is Better for Your Business?",
+  "Leveraging AI for E-commerce: Enhancing Customer Journeys",
+  "AI in Social Media Management: Tools and Strategies",
+  "AI and Web Security: Protecting Your Website from Cyber Threats",
+  "Training Your Team to Work with AI Technologies"
+];
+
+const marketingTopics = [
+  "How to Integrate Popular CRMs with Your Website for Seamless Marketing",
+  "Maximizing Your Marketing Efforts with Google Analytics Integration",
+  "Streamline Your Marketing with SMS Integration: A Comprehensive Guide",
+  "The Ultimate Guide to Email Marketing Integration for Your Business",
+  "Automated Content Creation with AI: Tools and Techniques",
+  "Boost Your Marketing ROI with CRM and Google Analytics Integration",
+  "Top 5 Benefits of Integrating Your CRM with Email Marketing",
+  "How to Use AI for Personalized Email Marketing Campaigns",
+  "Effective Strategies for SMS Marketing Automation",
+  "Integrating AI Chatbots with Your CRM for Enhanced Customer Engagement",
+  "Leveraging Google Analytics for Advanced Marketing Insights",
+  "Automated Content Creation: How AI Can Revolutionize Your Marketing Strategy",
+  "From Lead to Loyalty: Integrating CRM with Email and SMS for Comprehensive Customer Journeys",
+  "Best Practices for Integrating AI with Your Marketing Stack",
+  "How to Track and Optimize Your Marketing Campaigns with CRM and Google Analytics",
+  "The Future of Automated Content Creation: Trends and Predictions",
+  "Case Studies: Successful Marketing Integrations with Popular CRMs",
+  "AI in Marketing: A Deep Dive into Automated Content and Campaign Management",
+  "Enhancing Customer Experience with CRM and AI Integration",
+  "Step-by-Step Guide to Setting Up Automated Email Marketing Campaigns"
+]
+
+const crmTopics = [
+  "The Ultimate Guide to Salesforce Integration: Best Practices and Tips",
+  "Unlocking the Power of HubSpot CRM: Integration Strategies for Success",
+  "Maximizing Marketing Efficiency: How to Integrate Mailchimp with Your CRM",
+  "Streamlining Sales Processes: Benefits of Brevo CRM Integration",
+  "Top 5 Challenges of CRM Integration and How to Overcome Them",
+  "Choosing the Right CRM Integration: Factors to Consider",
+  "Case Study: Successful Salesforce Integration for [Client Name]",
+  "How to Build Custom CRM Integrations Tailored to Your Business Needs",
+  "The Future of CRM Integration: Trends and Predictions",
+  "Improving Customer Relationships Through Seamless CRM Integration",
+  "Boosting Productivity with Automated Workflows: A Guide to CRM Integration",
+  "Avoiding Common Pitfalls in CRM Integration Projects",
+  "Measuring Success: Key Metrics for Evaluating CRM Integration Performance",
+  "Integrating CRM with E-commerce Platforms: Opportunities and Challenges",
+  "Enhancing Customer Experience with Personalized CRM Integrations"
+];
 createBlogPost = async (req, res) => {
 
   console.log("🤖🤖🤖🤖🤖 Creating Blog Post HubSpot 🤖🤖🤖🤖🤖🤖🤖");
@@ -455,29 +601,69 @@ createBlogPost = async (req, res) => {
   const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
   const openai = new OpenAI({ apiKey: apiKey });
 
+    // Get the current date
+  const currentDate = new Date();
+
+  // Array to map the numeric day of the week to the name of the day
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  // Get the numeric day of the week (0 for Sunday, 1 for Monday, etc.)
+  const dayOfWeek = currentDate.getDay();
+
+  // Get the name of the day from the daysOfWeek array
+  const dayName = daysOfWeek[dayOfWeek];
+
 
   /////// Get Blog Topic Randomly ///////
-  const topic = ["Web Development", "AI integrations like chatGpt bots, HubSpot AI, AI content creation, AI powered google ads", "E-commerce integration like Shopify or Payment Processing like Stripe", "SEO optimization, google analytics, and google ads", "marketing integrations with popular CRMs, google analytics, sms, and email marketing, and automated content creation with ai", "CRM integrations like salesforce, HubSpot, MailChimp, Brevo"]
+
+  let topic = [];
+  let tagIds = [];
+
+  if (dayName === "Monday") {
+     topic.push(stripeTopics);
+     tagIds.push(159421975454);
+  } else if (dayName === "Tuesday") {
+     topic.push(seoTopics);
+     tagIds.push(160263059017);
+  } else if (dayName === "Wednesday") {
+      topic.push(aiTopics)
+      tagIds.push(158146563347);
+  } else if (dayName === "Thursday") {
+      topic.push(marketingTopics)
+      tagIds.push(158429568113);
+  } else if (dayName === "Friday") {
+      topic.push(crmTopics);
+      tagIds.push(160425892926);
+  } else if (dayName === "Saturday") {
+      topic.push(webDevTopics);
+      tagIds.push(165135476399);
+  } else if (dayName === "Sunday") {
+      topic.push(aiTopics);
+      tagIds.push(158146563347);
+  }
+
+
+  // const topic = ["Web Development", "AI integrations like chatGpt bots, HubSpot AI, AI content creation, AI powered google ads", "E-commerce integration like Shopify or Payment Processing like Stripe", "SEO optimization, google analytics, and google ads", "marketing integrations with popular CRMs, google analytics, sms, and email marketing, and automated content creation with ai", "CRM integrations like salesforce, HubSpot, MailChimp, Brevo"]
   const randomTopic = topic[Math.floor(Math.random() * topic.length)];
 
   console.log("Random Topic:",randomTopic);
 
    /////// Assign Tag Ids based on Topic //////
-   let tagIds = [];
+   
 
-   if (randomTopic === "Web Development") {
-       tagIds.push(165135476399);
-   } else if (randomTopic === "AI integrations like chatGpt bots, HubSpot AI, AI content creation, AI powered google ads") {
-       tagIds.push(158146563347);
-   } else if (randomTopic === "E-commerce integration like Shopify or Payment Processing like Stripe") {
-       tagIds.push(159421975454);
-   } else if (randomTopic === "SEO optimization, google analytics, and google ads") {
-       tagIds.push(160263059017);
-   } else if (randomTopic === "marketing integrations with popular CRMs, google analytics, sms, and email marketing, and automated content creation with ai") {
-       tagIds.push(158429568113);
-   } else if (randomTopic === "CRM integrations like salesforce, HubSpot, MailChimp, Brevo") {
-       tagIds.push(160425892926);
-   }
+  //  if (randomTopic === "Web Development") {
+  //      tagIds.push(165135476399);
+  //  } else if (randomTopic === "AI integrations like chatGpt bots, HubSpot AI, AI content creation, AI powered google ads") {
+  //      tagIds.push(158146563347);
+  //  } else if (randomTopic === "E-commerce integration like Shopify or Payment Processing like Stripe") {
+  //      tagIds.push(159421975454);
+  //  } else if (randomTopic === "SEO optimization, google analytics, and google ads") {
+  //      tagIds.push(160263059017);
+  //  } else if (randomTopic === "marketing integrations with popular CRMs, google analytics, sms, and email marketing, and automated content creation with ai") {
+  //      tagIds.push(158429568113);
+  //  } else if (randomTopic === "CRM integrations like salesforce, HubSpot, MailChimp, Brevo") {
+  //      tagIds.push(160425892926);
+  //  }
    
    // Example usage:
    console.log( "Tag Ids:", tagIds); // Output will depend on the value of randomTopic
@@ -707,7 +893,7 @@ createBlogPost = async (req, res) => {
   }
 };
 
-// createBlogPost();
+createBlogPost();
 
 const HUBSPOT_BLOG_AUTHORS_URL = 'https://api.hubapi.com/cms/v3/blogs/authors';
 
@@ -742,3 +928,4 @@ cron.schedule('0 7 * * *', async () => {
   console.log('Running cron job to create a HubSpot blog post... 3AM EST, 7AM UTC');
   createBlogPost();
 }, null, true, 'America/New_York');
+
