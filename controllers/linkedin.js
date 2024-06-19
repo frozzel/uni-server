@@ -401,7 +401,7 @@ cron.schedule('30 18 * * *', async () => {
         const apiKey = process.env.OPENAI_API_KEY;
         const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
       
-        const userMessage = `Compose a LinkedIn post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post . Provide only the content of the post as the response And Add the link to the article at the end of the post '${lastObject.url}', and keep the post under 2500 characters.`;
+        const userMessage = `Compose a LinkedIn post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post . Provide only the content of the post as the response And Do not add the link to the article, and keep the post under 2500 characters.`;
   
     const postNow = async () => {
           const chatGPTResponse = await axios.post(
@@ -432,7 +432,7 @@ cron.schedule('30 18 * * *', async () => {
             `https://api.linkedin.com/rest/posts`, 
             {
               "author": `urn:li:organization:${process.env.LINKEDIN_ORG_ID}`,
-              "commentary": reply,    
+              "commentary": reply + ' ' + lastObject.url,    
               "visibility": "PUBLIC",
               "distribution": {
                 "feedDistribution": "MAIN_FEED",

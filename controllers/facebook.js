@@ -69,12 +69,12 @@ postFacebook = async (req, res) => {
     
     const lastObject = lastBlogPost[lastBlogPost.length - 1];
 
-    console.log("Last blog post Obtained: ", lastObject.htmlTitle, lastObject.metaDescription, lastObject.url);
+    console.log("Last blog post Obtained: ", lastObject.htmlTitle, lastObject.metaDescription, lastObject.url, lastObject.featuredImage);
 
     const apiKey = process.env.OPENAI_API_KEY;
     const chatGPTApiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const userMessage = `Compose a Facebook post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}' and the source'${lastObject.authorName}'. Please include relevant hashtags and mentions in the post include the mention of my company @CyrusGroupInnovations. Provide only the content of the post as the response. I will provide the image and link to the blog post. Do not include the image or link in the post.`;
+    const userMessage = `Compose a Facebook post for my blog post with the title '${lastObject.htmlTitle}' discussing '${lastObject.metaDescription}'. Please include relevant hashtags and mentions in the post include the mention of my company @CyrusGroupInnovations. Provide only the content of the post as the response. I will provide the image and link to the blog post. Do not include the image or link in the post.`;
 
     const chatGPTResponse = await axios.post(
         chatGPTApiUrl,
@@ -99,11 +99,14 @@ postFacebook = async (req, res) => {
     // Share the content on Facebook
 
     const shareData = {
-      link: lastObject.url,
-      message: reply,
+      // scrape: true,
+      // link: lastObject.url,
+      message: reply + ' ' + lastObject.url,
+      url: lastObject.featuredImage,
+      // type: "article",
     };
 
-    FB.api(`/${process.env.FB_PAGE_ID}/feed`, 'POST', shareData, function (fbRes) {
+    FB.api(`/${process.env.FB_PAGE_ID}/photos`, 'POST', shareData, function (fbRes) {
         if (!fbRes || fbRes.error) {
           console.error('Error sharing: facebook', fbRes.error || 'Unknown error facebook');
           // res.status(400).json({ error: fbRes || 'Unknown error'});
