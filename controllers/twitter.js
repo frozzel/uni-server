@@ -18,6 +18,7 @@ const client = new TwitterApi({
     accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER,
     accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER,
 });
+// console.log(client);
 
 ////// testing the twitter api with image upload const img = (__dirname +    '/CRM.jpeg')
 
