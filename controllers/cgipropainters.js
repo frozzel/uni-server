@@ -2,6 +2,10 @@
 const axios = require('axios');
 const cloudinary = require('../config/cloudinary.js')
 const {TwitterApi} = require('twitter-api-v2');
+const FB = require('fb');
+const post = require('./seedData.js');
+const cron = require('node-cron');
+const {downloadFile} = require('../Utils/download.js');
 
 
 
@@ -10,15 +14,12 @@ exports.testApi = (req, res) => {
     res.send('Hello, CGI Pro Painters!');
 }
 
-
+/////////////////////////////////////
 ////////// Cloudinary API //////////
-
 /////////////////////////////////////
+
 // Gets details of an uploaded image
-/////////////////////////////////////
-const getAssetInfo = async (publicId) => {
-
-
+const getAssetInfo = async () => {
     try {
         // Get details about the asset
         const result = await cloudinary.api.resources();
@@ -37,64 +38,89 @@ const getAssetInfo = async (publicId) => {
 // Twitter CGI Pro Painters API /////
 /////////////////////////////////////
 
-// const client = new TwitterApi({
-//     // appKey: process.env.TWITTER_APP_KEY_CGI,
-//     // appSecret: process.env.TWITTER_APP_SECRET_CGI,
-//     accessToken: process.env.TW_API,
-//     accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER_CGI,
-//     // bearerToken: process.env.TWITTER_BEARER_TOKEN_CGI
-//   });
-//   console.log(client);
+postTwitter = async (req, res) => {
+      // Set the access token
 
-//   const client = new TwitterApi({
-//     // appKey: process.env.TWITTER_APP_KEY_CGI,
-//     // appSecret: process.env.TWITTER_APP_SECRET_CGI,
-//     // Following access tokens are not required if you are
-//     // at part 1 of user-auth process (ask for a request token)
-//     // or if you want a app-only client (see below)
-//     accessToken: process.env.TWITTER_APP_KEY_CGI,
-//     accessSecret: process.env.TWITTER_APP_SECRET_CGI,
-//   });
+  const client = new TwitterApi({
+    appKey: process.env.TWITTER_API_KEY_CGI,
+    appSecret: process.env.TWITTER_API_SECRET_CGI,
+    accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER_CGI,
+    accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER_CGI,
+  });
+  try {
 
-// console.log(client);
+  // Randomly select a post
+  const lastObject = post[Math.floor(Math.random() * post.length)];
 
+  // Post the content on Twitter
 
-
-checkTweet = async (req, res) => {
-    try {
-        // Tell typescript it's a readonly app
-        const readOnlyClient = client.readOnly;
-
-        // Play with the built in methods
-        const user = await readOnlyClient.v2.userByUsername('@CGIProPainters');
-        console.log(user);
-
-        // const tweet = await client.v2.tweet({
-        //     text: 'Hello, CGI Pro Painters!',
-
-        // });
-        // console.log(tweet);
-        return user;
+  const { filePath } = await downloadFile(lastObject.image_url); // Download the image and get the file path
+  const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+  const resp = await client.v2.tweet({
+    text: lastObject.message + ' ' + lastObject.link,
+    media: { media_ids: [mediaId] }
+    });
+    // res.json(resp);
+    console.log('CGI Pro Painters Shared successfully: Twitter ⓉⓉⓉⓉⓉ', resp);
     } catch (error) {
-        console.error("Error:",error);
+    console.error(error);
+    // res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
-}
-//   const resp =  client.v2.tweet({
-//     text: 'Hello, CGI Pro Painters!',
-//   });
+  }
 
-//   checkTweet();
-//     console.log(resp);
+  // postTwitter()
 
-//   Get the recent tweets
-//   const getRecentTweets = async () => {
-//     try {
-//       const tweets = await client.v1.timeline('user_timeline', {screen_name: 'CGIProPainters', count: 5});
-//       console.log(tweets);
-//       return tweets;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
+/////////////////////////////////////
+// Schedule the Twitter post daily //
+/////////////////////////////////////
 
-//   getRecentTweets();    
+cron.schedule('30 21 * * *', () => {
+    console.log('𝕏𝕏𝕏𝕏𝕏 CGI Pro Painters Posting to twitter every day at at 9:30 utc 5:30pm EST! 🐥🐥🐥🐥🐥');
+    postTwitter();
+  }
+  , null, true, 'America/New_York');
+
+
+//////////////////////////////////////
+// Facebook CGI Pro Painters API /////
+//////////////////////////////////////
+
+postFacebook = async (req, res) => {
+    // Set the access token
+    FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN_CGI);
+
+    // Randomly select a post
+    const lastObject = post[Math.floor(Math.random() * post.length)];
+
+    // Post the content on Facebook
+  
+      const shareData = {
+        message: lastObject.message + ' ' + lastObject.link,
+        url: lastObject.image_url,
+      };
+  
+      FB.api(`/${process.env.FB_PAGE_ID_CGI}/photos`, 'POST', shareData, function (fbRes) {
+          if (!fbRes || fbRes.error) {
+            console.error('CGI Error sharing: facebook', fbRes.error || 'Unknown error facebook');
+            // res.status(400).json({ error: fbRes || 'Unknown error'}); // remove for production needed for endpoint testing
+            return;
+          }
+          console.log('CGI Pro Painters Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
+          // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' }); // remove for production needed for endpoint testing
+        });
+    
+  }
+
+  // postFacebook()
+
+//////////////////////////////////////
+// Schedule the Facebook post daily //
+//////////////////////////////////////
+
+cron.schedule('30 22 * * *', () => {
+    console.log('CGI Pro Painters Posting to facebook every day at 6:30PM 22utc ⓕⓕⓕⓕⓕ');
+    postFacebook();
+  }, null, true, 'America/New_York');
+
+
+//////////////////////////////////////

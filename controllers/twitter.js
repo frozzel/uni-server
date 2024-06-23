@@ -12,12 +12,6 @@ exports.testApi = (req, res) => {
 
 ////////// Twitter API //////////
 
-const client = new TwitterApi({
-    appKey: process.env.TWITTER_API_KEY,
-    appSecret: process.env.TWITTER_API_SECRET,
-    accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER,
-    accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER,
-});
 // console.log(client);
 
 ////// testing the twitter api with image upload const img = (__dirname +    '/CRM.jpeg')
@@ -41,6 +35,12 @@ const client = new TwitterApi({
 
 /// not updated use cron job to post tweets///
 exports.postTweet = async (req, res) => {
+  const client = new TwitterApi({
+    appKey: process.env.TWITTER_API_KEY,
+    appSecret: process.env.TWITTER_API_SECRET,
+    accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER,
+    accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER,
+});
     try {
         // Calculate the date 5 days ago
         const fiveDaysAgo = new Date();
@@ -118,6 +118,12 @@ exports.postTweet = async (req, res) => {
 
 /// updated use cron job to post tweets///
 postTweetTechNews = async (req, res) => {
+  const client = new TwitterApi({
+    appKey: process.env.TWITTER_API_KEY,
+    appSecret: process.env.TWITTER_API_SECRET,
+    accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER,
+    accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER,
+});
   
     console.log('Getting Tech News..........')
     const news = await axios.get(`https://newsapi.org/v2/everything?q=Technology+OR+AI+OR+Crypto+OR+Security+OR+startups+OR+apps&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
@@ -182,6 +188,12 @@ postTweetTechNews = async (req, res) => {
 };
 
 postTweetBusNews = async (req, res) => {
+  const client = new TwitterApi({
+    appKey: process.env.TWITTER_API_KEY,
+    appSecret: process.env.TWITTER_API_SECRET,
+    accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER,
+    accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER,
+});
   
   console.log('Getting Tech News..........')
   const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29+NOT%28climate+OR+trump+OR+biden+OR+DEI+OR+diversity+OR+Israel+OR+palestine+OR+environment%29&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
@@ -246,11 +258,17 @@ postTweetBusNews = async (req, res) => {
 };
 
 
-// postTweetBusNews()
+// postTweetTechNews()
 
 ////////// Cron API //////////
 
 cron.schedule('0 21 * * *', async () => {
+  const client = new TwitterApi({
+    appKey: process.env.TWITTER_API_KEY,
+    appSecret: process.env.TWITTER_API_SECRET,
+    accessToken: process.env.TWITTER_API_KEY_NON_CONSUMER,
+    accessSecret: process.env.TWITTER_API_SECRET_NON_CONSUMER,
+});
     try {
         console.log('Posting Blog to Twitter 🐥🐥🐥🐥🐥, every weekday at 9:00 utc 5pm EST! 𝕏𝕏𝕏𝕏𝕏');
         // Calculate the date 5 days ago

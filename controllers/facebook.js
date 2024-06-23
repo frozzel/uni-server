@@ -12,7 +12,7 @@ exports.testApi = (req, res) => {
 
 ////////// Facebook API //////////
 
-FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
+
 
 // Data to share
 
@@ -38,6 +38,7 @@ FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
 // postFacebook();// 
 
 postFacebook = async (req, res) => {
+  FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
 
   // Calculate the date 5 days ago
   const fiveDaysAgo = new Date();
@@ -119,6 +120,8 @@ postFacebook = async (req, res) => {
 }
 
 postFacebookTechNews = async (req, res) => {
+  FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
+
 
     console.log('Getting Tech News..........')
     const news = await axios.get(`https://newsapi.org/v2/everything?q=Technology+OR+AI+OR+Crypto+OR+Security+OR+startups+OR+apps&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
@@ -191,6 +194,8 @@ postFacebookTechNews = async (req, res) => {
 }
 
 postFacebookBusNews = async (req, res) => {
+  FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
+
 
   console.log('Getting Tech News..........')
   const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29+NOT%28climate+OR+trump+OR+biden+OR+DEI+OR+diversity+OR+Israel+OR+palestine+OR+environment%29&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
@@ -259,7 +264,7 @@ postFacebookBusNews = async (req, res) => {
     });
 
 }
-// postFacebookBusNews();
+// postFacebookTechNews();
 // postFacebook()
 // Schedule the Facebook post
 
