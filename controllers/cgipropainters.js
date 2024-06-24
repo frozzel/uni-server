@@ -172,7 +172,7 @@ postInstagram = async (req, res) => {
 // Schedule the Instagram post daily //
 //////////////////////////////////////
 
-cron.schedule('30 16 * * *', () => {
+cron.schedule('30 16 * * 2', () => {
   console.log('CGI Posting to Instagram at 8am (12utc)📸 📸');
   postToInstagram();
 }, null, true, 'America/New_York');
