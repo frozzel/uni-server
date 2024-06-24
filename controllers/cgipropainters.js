@@ -74,7 +74,7 @@ postTwitter = async (req, res) => {
 // Schedule the Twitter post daily //
 /////////////////////////////////////
 
-cron.schedule('30 21 * * *', () => {
+cron.schedule('30 21 * * 4', () => {
     console.log('𝕏𝕏𝕏𝕏𝕏 CGI Pro Painters Posting to twitter every day at at 9:30 utc 5:30pm EST! 🐥🐥🐥🐥🐥');
     postTwitter();
   }
@@ -117,7 +117,7 @@ postFacebook = async (req, res) => {
 // Schedule the Facebook post daily //
 //////////////////////////////////////
 
-cron.schedule('30 22 * * *', () => {
+cron.schedule('30 22 * * 1', () => {
     console.log('CGI Pro Painters Posting to facebook every day at 6:30PM 22utc ⓕⓕⓕⓕⓕ');
     postFacebook();
   }, null, true, 'America/New_York');
