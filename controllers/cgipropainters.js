@@ -124,3 +124,56 @@ cron.schedule('30 22 * * *', () => {
 
 
 //////////////////////////////////////
+// Instagram CGI Pro Painters API ////
+//////////////////////////////////////
+
+postInstagram = async (req, res) => {
+  FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN_CGI);
+
+      // Randomly select a post
+      const lastObject = post[Math.floor(Math.random() * post.length)];
+
+      // Post the content on Facebook
+    
+
+      // Step 1: Upload the image to Facebook
+    FB.api(`/${process.env.IG_ID_CGI}/media`, 'POST', {
+      media_type: 'IMAGE', // or VIDEO
+      image_url: lastObject.image_url,
+      caption: lastObject.message + `\n \n` + lastObject.link,
+      comment_enabled: true,
+      published: true
+  }, function (response) {
+      if (!response || response.error) {
+          console.error('Error uploading image: Instagram', response.error);
+          return;
+      }
+
+      const photoId = response.id;
+
+      console.log('📸 Photo uploaded successfully: Instagram 📸 CGI Pro Painters', photoId);
+
+      // Step 2: Publish the photo to Instagram
+      FB.api(`/${process.env.IG_ID_CGI}/media_publish`, 'POST', {
+          creation_id: photoId
+      }, function (response) {
+          if (!response || response.error) {
+              console.error('Error publishing to Instagram CGI: 📸', response.error);
+              return;
+          }
+
+      });
+  });
+}  
+
+// postInstagram()
+
+//////////////////////////////////////
+// Schedule the Instagram post daily //
+//////////////////////////////////////
+
+cron.schedule('30 16 * * *', () => {
+  console.log('CGI Posting to Instagram at 8am (12utc)📸 📸');
+  postToInstagram();
+}, null, true, 'America/New_York');
+
