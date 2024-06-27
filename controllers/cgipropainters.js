@@ -38,7 +38,7 @@ const getAssetInfo = async () => {
 // Twitter CGI Pro Painters API /////
 /////////////////////////////////////
 
-postTwitter = async (req, res) => {
+postTwitterCGI = async (req, res) => {
       // Set the access token
 
   const client = new TwitterApi({
@@ -62,13 +62,15 @@ postTwitter = async (req, res) => {
     });
     // res.json(resp);
     console.log('CGI Pro Painters Shared successfully: Twitter ⓉⓉⓉⓉⓉ', resp);
+    return;
     } catch (error) {
-    console.error(error);
+    console.error("CGI Twitter Post Failed", error);
+    return;
     // res.status(500).json({ error: 'An error occurred while posting the tweet' });
     }
   }
 
-  // postTwitter()
+  // postTwitterCGI()
 
 /////////////////////////////////////
 // Schedule the Twitter post daily //
@@ -76,7 +78,7 @@ postTwitter = async (req, res) => {
 
 cron.schedule('30 21 * * 4', () => {
     console.log('𝕏𝕏𝕏𝕏𝕏 CGI Pro Painters Posting to twitter every day at at 9:30 utc 5:30pm EST! 🐥🐥🐥🐥🐥');
-    postTwitter();
+    postTwitterCGI();
   }
   , null, true, 'America/New_York');
 
@@ -85,7 +87,7 @@ cron.schedule('30 21 * * 4', () => {
 // Facebook CGI Pro Painters API /////
 //////////////////////////////////////
 
-postFacebook = async (req, res) => {
+postFacebookCGI = async (req, res) => {
     // Set the access token
     FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN_CGI);
 
@@ -106,12 +108,13 @@ postFacebook = async (req, res) => {
             return;
           }
           console.log('CGI Pro Painters Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
+          return;
           // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' }); // remove for production needed for endpoint testing
         });
     
   }
 
-  // postFacebook()
+  // postFacebookCGI()
 
 //////////////////////////////////////
 // Schedule the Facebook post daily //
@@ -119,7 +122,7 @@ postFacebook = async (req, res) => {
 
 cron.schedule('30 22 * * 1', () => {
     console.log('CGI Pro Painters Posting to facebook every day at 6:30PM 22utc ⓕⓕⓕⓕⓕ');
-    postFacebook();
+    postFacebookCGI();
   }, null, true, 'America/New_York');
 
 
@@ -127,7 +130,7 @@ cron.schedule('30 22 * * 1', () => {
 // Instagram CGI Pro Painters API ////
 //////////////////////////////////////
 
-postInstagram = async (req, res) => {
+postInstagramCGI = async (req, res) => {
   FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN_CGI);
 
       // Randomly select a post
@@ -161,12 +164,14 @@ postInstagram = async (req, res) => {
               console.error('Error publishing to Instagram CGI: 📸', response.error);
               return;
           }
+          console.log('📸 Shared successfully: Instagram CGI 📸', response);
+          return;
 
       });
   });
 }  
 
-// postInstagram()
+// postInstagramCGI()
 
 //////////////////////////////////////
 // Schedule the Instagram post daily //
@@ -174,6 +179,6 @@ postInstagram = async (req, res) => {
 
 cron.schedule('30 16 * * 2', () => {
   console.log('CGI Posting to Instagram at 8am (12utc)📸 📸');
-  postToInstagram();
+  postToInstagramCGI();
 }, null, true, 'America/New_York');
 
