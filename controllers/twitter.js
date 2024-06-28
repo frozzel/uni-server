@@ -184,6 +184,7 @@ postTweetTechNews = async (req, res) => {
           // media: { media_ids: [mediaId] }
       });
       console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏𝕏", resp);
+      return;
 
 };
 
@@ -254,11 +255,12 @@ postTweetBusNews = async (req, res) => {
         // media: { media_ids: [mediaId] }
     });
     console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏", resp);
+    return;
 
 };
 
 
-// postTweetTechNews()
+// postTweetBusNews()
 
 ////////// Cron API //////////
 
@@ -340,11 +342,13 @@ cron.schedule('0 21 * * *', async () => {
         });
         // res.json(resp);
         console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏 Twitter", resp);
+        return;
     } catch (error) {
         console.error("Twitter Error Failure 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏 Twitter Failure", error);
         // res.status(500).json({ error: 'An error occurred while posting the tweet' });
+        return;
     }
-});
+},null, true, 'America/New_York');
 
 cron.schedule('0 12 * * *', async () => {
   console.log('Posting to twitter 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏𝕏 tech news a task every day at 8:00 am 12utc  EST! Twitter!');

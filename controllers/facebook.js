@@ -115,6 +115,7 @@ postFacebook = async (req, res) => {
         }
         console.log('Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
         // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
+        return;
       });
   
 }
@@ -189,6 +190,7 @@ postFacebookTechNews = async (req, res) => {
         }
         console.log('Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
         // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
+        return;
       });
   
 }
@@ -261,10 +263,11 @@ postFacebookBusNews = async (req, res) => {
       }
       console.log('Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
       // res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
+      return;
     });
 
 }
-// postFacebookTechNews();
+// postFacebookBusNews();
 // postFacebook()
 // Schedule the Facebook post
 

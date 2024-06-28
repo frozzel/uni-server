@@ -99,7 +99,8 @@ postToInstagram = async (req, res) => {
                 console.error('Error publishing to Instagram: 📸', response.error);
                 return;
             }
-
+            console.log('📸 Shared successfully: Instagram 📸', response);
+            return;
         });
     });
 }
