@@ -1,14 +1,14 @@
 const post = [
-    {
-        "message": "Transform your home with a fresh coat of paint! Our experts at CGI Pro Painters ensure a flawless finish every time. #HomeImprovement #PaintingServices",
-        "image_url":  'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979928/White_Professional_Painting_Services_Flyer_u_-_Made_with_PosterMyWall_hsxpmu.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "Boost your curb appeal with professional exterior painting by CGI Pro Painters. Call us today! #ExteriorPainting #CurbAppeal",
-    //     "image_url":'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
+    //     "message": "Transform your home with a fresh coat of paint! Our experts at CGI Pro Painters ensure a flawless finish every time. #HomeImprovement #PaintingServices",
+    //     "image_url":  'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979928/White_Professional_Painting_Services_Flyer_u_-_Made_with_PosterMyWall_hsxpmu.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "Boost your curb appeal with professional exterior painting by CGI Pro Painters. Call us today! #ExteriorPainting #CurbAppeal",
+        "image_url":'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "Revamp your office space with vibrant colors! CGI Pro Painters offers top-notch commercial painting services. #OfficeRenovation #CommercialPainting",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',

@@ -71,6 +71,7 @@ postTwitterCGI = async (req, res) => {
   }
 
   // postTwitterCGI()
+  // console.log(post)
 
 /////////////////////////////////////
 // Schedule the Twitter post daily //
