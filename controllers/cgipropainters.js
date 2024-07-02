@@ -180,6 +180,6 @@ postInstagramCGI = async (req, res) => {
 
 cron.schedule('30 16 * * 2', () => {
   console.log('CGI Posting to Instagram at 8am (12utc)📸 📸');
-  postToInstagramCGI();
+  postInstagramCGI();
 }, null, true, 'America/New_York');
 
