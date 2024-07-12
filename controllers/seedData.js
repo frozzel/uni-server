@@ -9,16 +9,16 @@ const post = [
     //     "image_url":'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
     //     "link": "https://cgipropainters.com"
     // },
-    {
-        "message": "Revamp your office space with vibrant colors! CGI Pro Painters offers top-notch commercial painting services. #OfficeRenovation #CommercialPainting",
-        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "Say goodbye to outdated wallpaper! CGI Pro Painters provide seamless wallpaper removal and painting. #WallpaperRemoval #HomeUpgrade",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
+    //     "message": "Revamp your office space with vibrant colors! CGI Pro Painters offers top-notch commercial painting services. #OfficeRenovation #CommercialPainting",
+    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "Say goodbye to outdated wallpaper! CGI Pro Painters provide seamless wallpaper removal and painting. #WallpaperRemoval #HomeUpgrade",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "From prep to finish, we handle it all! Experience quality and precision with CGI Pro Painters. #QualityPainting #ProfessionalPainters",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
