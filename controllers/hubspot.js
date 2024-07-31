@@ -11,10 +11,30 @@ const cron = require('node-cron');
 
 ////////// Test API //////////
 exports.testApi = (req, res) => {
-    res.send('Hello, World!');
+    res.send('Hello, World! HubSpot API is working!');
 }
 
+/////////////////////////////////
 ////////// HubSpot API //////////
+/////////////////////////////////
+
+////////// Get Contacts  ///////
+
+exports.getContacts = async (req, res) => {
+    const contacts = `https://api.hubapi.com/crm/v3/objects/contacts?limit=10`;
+    const headers = {
+        Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+
+    try { 
+        const resp = await axios.get(contacts, { headers });
+        res.json(resp.data);
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
 
 exports.getInfo = async (req, res) => {
 
