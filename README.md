@@ -1,7 +1,7 @@
 <div>
 <a href=""><img src="https://github.com/frozzel/frozzel/blob/63a9fc8f1afe7447e8074be5e67a79bfa6c3c591/Black%20Playful%20Animated%20Welcome%20Channel%20Youtube%20Intro%20Video.gif" align="center" height="" width="100%" ></a></div>
 
-# Uni-Server 
+# Uni-Server (Universal Server)
 
 ## Overview
 
