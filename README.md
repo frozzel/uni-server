@@ -150,7 +150,7 @@ Once the server is running, it will automatically handle content creation and po
 
       Example https://www.linkedin.com/developers/tools/oauth/redirect?code=YOU NEED THIS
 
-2. Open POstMan, go to linked in collection, gettokken and add the Token to the Body code section
+2. Open POstMan, go to linked in collection, post to access token end point and add the Token to the Body code section
 
     THis will be the two month auth code needed to post.
 
