@@ -4,16 +4,16 @@ const post = [
     //     "image_url":  'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979928/White_Professional_Painting_Services_Flyer_u_-_Made_with_PosterMyWall_hsxpmu.jpg',
     //     "link": "https://cgipropainters.com"
     // },
-    {
-        "message": "Enhance your home's curb appeal with our expert exterior painting services. Contact CGI Pro Painters today! #ExteriorPainting #CurbAppeal #HouseTransformation #ExpertPainters",
-        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "Refresh your workspace with vibrant colors! CGI Pro Painters provide premium commercial painting solutions. #OfficeMakeover #CommercialPainting #WorkspaceRefresh #BusinessTransformation",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
+    //     "message": "Enhance your home's curb appeal with our expert exterior painting services. Contact CGI Pro Painters today! #ExteriorPainting #CurbAppeal #HouseTransformation #ExpertPainters",
+    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "Refresh your workspace with vibrant colors! CGI Pro Painters provide premium commercial painting solutions. #OfficeMakeover #CommercialPainting #WorkspaceRefresh #BusinessTransformation",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "Remove outdated wallpaper with ease! CGI Pro Painters offer seamless wallpaper removal and painting services. #WallpaperRemoval #HomeUpgrade #FreshStart #ProfessionalPainters",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
