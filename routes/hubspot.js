@@ -9,6 +9,6 @@ router.get('/test', testApi);
 router.get('/getInfo', getInfo);
 router.post('/postToLinkedIn', postToLinkedIn);
 router.post('/aiPostToLinkedIn', aiPostToLinkedIn);
-// router.get('/contacts', getContacts);
+// router.get('/contacts', getContacts);  /// this is for testing purpose only
 
 module.exports = router;
