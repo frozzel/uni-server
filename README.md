@@ -195,11 +195,7 @@ Once the server is running, it will automatically handle content creation and po
 ### META
 
 >[!NOTE]
-> Helpful articles for basic concept under standings:
-
-[FACEBOOK API DOCS](https://developers.facebook.com/docs/facebook-login/guides/access-tokens)
-
-[META API DOCS](https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0)
+> Helpful articles for basic concept under standings:[FACEBOOK API DOCS](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) || [META API DOCS](https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0)
 
 1. Go To graph API Explorer, Hit Generate Access Token to reauthorize user first, submit the GET request to verify its working. Save Token
 Next Select Page Token and do the same as above now submit with the page token to verify page access. 
