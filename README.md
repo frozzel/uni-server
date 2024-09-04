@@ -104,7 +104,7 @@ The server will be available at `http://localhost:8080`.
 4. Follow LinkedIn's OAuth 2.0 flow to get the access token.
 
 > [!TIP] 
-> [Check out their API Docs](https://learn.microsoft.com/en-us/linkedin/)
+> [LinkedIn API Docs](https://learn.microsoft.com/en-us/linkedin/)
 
 ### Facebook
 
@@ -113,12 +113,18 @@ The server will be available at `http://localhost:8080`.
 3. Note the App ID and App Secret and add them to your `.env` file.
 4. Follow Facebook's OAuth 2.0 flow to get the access token.
 
+> [!TIP] 
+> [META API Docs](https://developers.facebook.com/docs/)
+
 ### Instagram
 
 1. Go to the Facebook for Developers site and create a new app (if you don't have one from Facebook setup).
 2. Set up Instagram Basic Display and add the redirect URI as `http://localhost:3000/auth/instagram/callback`.
 3. Note the App ID and App Secret and add them to your `.env` file.
 4. Follow Instagram's OAuth 2.0 flow to get the access token.
+
+> [!TIP] 
+> [META API Docs](https://developers.facebook.com/docs/)
 
 ### Twitter
 
@@ -127,15 +133,24 @@ The server will be available at `http://localhost:8080`.
 3. Note the API Key and API Secret Key and add them to your `.env` file.
 4. Follow Twitter's OAuth 2.0 flow to get the access token.
 
+> [!TIP] 
+> [X API Docs](https://developer.x.com/en/products/x-api)
+
 ### HubSpot
 
 1. Go to the HubSpot Developer portal and create a new app.
 2. Note the API Key and add it to your `.env` file.
 
+> [!TIP] 
+> [HubSpot API Docs](https://developers.hubspot.com/docs/api/overview)
+
 ### News API
 
 1. Go to the News API website and sign up for an API key.
 2. Add the API key to your `.env` file.
+
+> [!TIP] 
+> [News API Docs](https://newsapi.org/)
 
 ## Usage
 
