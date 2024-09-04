@@ -52,18 +52,37 @@
 
 1. Create a `.env` file in the root directory and add your API keys and other configurations. Here's a template for the `.env` file:
     ```env
-    OPENAI_API_KEY=your_openai_api_key
-    LINKEDIN_CLIENT_ID=your_linkedin_client_id
-    LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
-    LINKEDIN_REDIRECT_URI=your_linkedin_redirect_uri
-    FACEBOOK_APP_ID=your_facebook_app_id
-    FACEBOOK_APP_SECRET=your_facebook_app_secret
-    INSTAGRAM_APP_ID=your_instagram_app_id
-    INSTAGRAM_APP_SECRET=your_instagram_app_secret
-    TWITTER_API_KEY=your_twitter_api_key
-    TWITTER_API_SECRET=your_twitter_api_secret
-    HUBSPOT_API_KEY=your_hubspot_api_key
-    NEWS_API_KEY=your_news_api_key
+    MONGODB_URI=mongodb://127.0.0.1:27017/test
+    OPENAI_API_KEY=
+    PRIVATE_APP_ACCESS=
+    LINKEDIN_CLIENT_ID=
+    LINKEDIN_CLIENT_SECRET=
+    LINKEDIN_TOKEN=
+    LINKEDIN_ORG_ID=
+    LINKEDIN_MEMBER_ID=
+    TWITTER_API_KEY=
+    TWITTER_API_SECRET=
+    TWITTER_BEARER_TOKEN=
+    TWITTER_API_SECRET_NON_CONSUMER=
+    TWITTER_CLIENTID=
+    TWITTER_CLIENT_SECRET=
+    FACEBOOK_ACCESS_TOKEN=
+    FB_PAGE_ID=
+    FACEBOOK_ACCESS_TOKEN_CGI=
+    FB_PAGE_ID_CGI=
+    IG_ID=
+    IG_ID_CGI=
+    NEWS_API_KEY=
+    CLOUDINARY_CLOUD_NAME=
+    CLOUDINARY_API_KEY=
+    CLOUDINARY_API_SECRET=
+    TWITTER_API_KEY_CGI=
+    TWITTER_API_SECRET_CGI=
+    TWITTER_BEARER_TOKEN_CGI=
+    TWITTER_API_KEY_NON_CONSUMER_CGI=
+    TWITTER_API_SECRET_NON_CONSUMER_CGI=
+    TWITTER_CLIENTID_CGI=
+    TWITTER_CLIENT_SECRET_CGI=
     ```
 
 ## Running the Server
