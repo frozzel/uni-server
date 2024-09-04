@@ -104,7 +104,7 @@ The server will be available at `http://localhost:8080`.
 4. Follow LinkedIn's OAuth 2.0 flow to get the access token.
 
 > [!TIP] 
-> Check out their API Docs `https://learn.microsoft.com/en-us/linkedin/`
+> [Check out their API Docs](https://learn.microsoft.com/en-us/linkedin/)
 
 ### Facebook
 
