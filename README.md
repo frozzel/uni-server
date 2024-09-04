@@ -173,11 +173,7 @@ Once the server is running, it will automatically handle content creation and po
 ### LINKEDIN
 
 >[!NOTE]
-> Helpful articles for basic concept under standings: 
->
->[Medium Article](https://medium.com/@evgeni.leonti/post-to-facebook-page-with-nodejs-379e885033de) 
->
->[DEV Article](https://dev.to/fardinabir/fetching-linkedin-user-data-and-sign-in-with-linkedin-using-openid-connect-3kf)
+> Helpful articles for basic concept under standings:  [Medium Article](https://medium.com/@evgeni.leonti/post-to-facebook-page-with-nodejs-379e885033de) && [DEV Article](https://dev.to/fardinabir/fetching-linkedin-user-data-and-sign-in-with-linkedin-using-openid-connect-3kf)
 
 1. Copy link below into Browser (first add client id from app for developer or env file)
 
@@ -195,7 +191,7 @@ Once the server is running, it will automatically handle content creation and po
 ### META
 
 >[!NOTE]
-> Helpful articles for basic concept under standings:[FACEBOOK API DOCS](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) || [META API DOCS](https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0)
+> Helpful articles for basic concept under standings:  [FACEBOOK API DOCS](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) && [META API DOCS](https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0)
 
 1. Go To graph API Explorer, Hit Generate Access Token to reauthorize user first, submit the GET request to verify its working. Save Token
 Next Select Page Token and do the same as above now submit with the page token to verify page access. 
