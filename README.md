@@ -89,19 +89,22 @@
 
 Start the server with:
 ```sh
-npm start
+npm run dev
 ```
 
-The server will be available at `http://localhost:3000`.
+The server will be available at `http://localhost:8080`.
 
 ## API Setup
 
 ### LinkedIn
 
 1. Go to the LinkedIn Developer portal and create a new application.
-2. Set the redirect URI to `http://localhost:3000/auth/linkedin/callback`.
+2. Set the redirect URI to `http://localhost:8080/auth/linkedin/callback`.
 3. Note the Client ID and Client Secret and add them to your `.env` file.
 4. Follow LinkedIn's OAuth 2.0 flow to get the access token.
+
+> [!TIP] 
+> Check out their API Docs `https://learn.microsoft.com/en-us/linkedin/`
 
 ### Facebook
 
