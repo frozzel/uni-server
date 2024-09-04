@@ -194,9 +194,7 @@ Once the server is running, it will automatically handle content creation and po
 
 ### META
 
->[!NOTE]
-> Helpful articles for basic concept under standings:
->
+>[!NOTE] Helpful articles for basic concept under standings:
 >[FACEBOOK API DOCS](https://developers.facebook.com/docs/facebook-login/guides/access-tokens)
 >
 >[META API DOCS](https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0)
