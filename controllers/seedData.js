@@ -14,16 +14,16 @@ const post = [
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
     //     "link": "https://cgipropainters.com"
     // },
-    {
-        "message": "Remove outdated wallpaper with ease! CGI Pro Painters offer seamless wallpaper removal and painting services. #WallpaperRemoval #HomeUpgrade #FreshStart #ProfessionalPainters",
-        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "From preparation to finishing touches, we manage it all! Experience superior quality with CGI Pro Painters. #QualityCraftsmanship #ProfessionalPainters #DetailOriented #ExpertPainters",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
+    //     "message": "Remove outdated wallpaper with ease! CGI Pro Painters offer seamless wallpaper removal and painting services. #WallpaperRemoval #HomeUpgrade #FreshStart #ProfessionalPainters",
+    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "From preparation to finishing touches, we manage it all! Experience superior quality with CGI Pro Painters. #QualityCraftsmanship #ProfessionalPainters #DetailOriented #ExpertPainters",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "Upgrade your living space with our tailored painting solutions. CGI Pro Painters, your reliable partner in painting! #CustomPainting #InteriorDesign #LivingSpaceEnhancement #HomeMakeover",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/House_Painting_Services_Flyer_-_Made_with_PosterMyWall_ygam1p.jpg',
