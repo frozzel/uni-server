@@ -19,16 +19,16 @@ const post = [
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
     //     "link": "https://cgipropainters.com"
     // },
-    {
-        "message": "From preparation to finishing touches, we manage it all! Experience superior quality with CGI Pro Painters. #QualityCraftsmanship #ProfessionalPainters #DetailOriented #ExpertPainters",
-        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "Upgrade your living space with our tailored painting solutions. CGI Pro Painters, your reliable partner in painting! #CustomPainting #InteriorDesign #LivingSpaceEnhancement #HomeMakeover",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/House_Painting_Services_Flyer_-_Made_with_PosterMyWall_ygam1p.jpg',
+    //     "message": "From preparation to finishing touches, we manage it all! Experience superior quality with CGI Pro Painters. #QualityCraftsmanship #ProfessionalPainters #DetailOriented #ExpertPainters",
+    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "Upgrade your living space with our tailored painting solutions. CGI Pro Painters, your reliable partner in painting! #CustomPainting #InteriorDesign #LivingSpaceEnhancement #HomeMakeover",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/House_Painting_Services_Flyer_-_Made_with_PosterMyWall_ygam1p.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "Turn your vision into reality with CGI Pro Painters. We offer personalized services tailored to your needs. #TailoredServices #DreamHome #PersonalizedSolutions #InteriorUpgrade",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Service_Flyer_Template_-_Made_with_PosterMyWall_z1twty.jpg',
