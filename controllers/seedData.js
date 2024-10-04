@@ -1,14 +1,14 @@
 const post = [
-    {
-        "message": "Transform your home with CGI Pro Painters! Our experts deliver a perfect finish every time. #HomeMakeover #InteriorPainting #NewLook #ProfessionalPainters",
-        "image_url":  'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979928/White_Professional_Painting_Services_Flyer_u_-_Made_with_PosterMyWall_hsxpmu.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "Boost your home's exterior charm with CGI Pro Painters! Contact us for top-notch exterior painting services. #ExteriorMakeover #CurbAppeal #HomeTransformation #ProfessionalPainters",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
+    //     "message": "Transform your home with CGI Pro Painters! Our experts deliver a perfect finish every time. #HomeMakeover #InteriorPainting #NewLook #ProfessionalPainters",
+    //     "image_url":  'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979928/White_Professional_Painting_Services_Flyer_u_-_Made_with_PosterMyWall_hsxpmu.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "Boost your home's exterior charm with CGI Pro Painters! Contact us for top-notch exterior painting services. #ExteriorMakeover #CurbAppeal #HomeTransformation #ProfessionalPainters",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "Brighten up your workspace with CGI Pro Painters! We offer high-quality commercial painting services. #OfficeRevamp #CommercialPainting #WorkspaceUpgrade #BusinessTransformation",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
