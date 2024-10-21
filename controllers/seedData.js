@@ -9,16 +9,16 @@ const post = [
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/PAINTING_SERVICES_POSTER_-_Made_with_PosterMyWall_n7gphe.jpg',
     //     "link": "https://cgipropainters.com"
     // },
-    {
-        "message": "Brighten up your workspace with CGI Pro Painters! We offer high-quality commercial painting services. #OfficeRevamp #CommercialPainting #WorkspaceUpgrade #BusinessTransformation",
-        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "Out with the old, in with the new! CGI Pro Painters make wallpaper removal and painting stress-free. #WallpaperRemoval #HomeRefresh #NewLook #ProfessionalPainters",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
+    //     "message": "Brighten up your workspace with CGI Pro Painters! We offer high-quality commercial painting services. #OfficeRevamp #CommercialPainting #WorkspaceUpgrade #BusinessTransformation",
+    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "Out with the old, in with the new! CGI Pro Painters make wallpaper removal and painting stress-free. #WallpaperRemoval #HomeRefresh #NewLook #ProfessionalPainters",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "From start to finish, CGI Pro Painters handle it all! Quality craftsmanship with every project. #SuperiorQuality #ProfessionalPainters #AttentionToDetail #ExpertPainters",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
