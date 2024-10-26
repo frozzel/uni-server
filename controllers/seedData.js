@@ -14,16 +14,16 @@ const post = [
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Interior_design_unlimited_-_Made_with_PosterMyWall_vgm0jf.jpg',
     //     "link": "https://cgipropainters.com"
     // },
-    {
-        "message": "Out with the old, in with the new! CGI Pro Painters make wallpaper removal and painting stress-free. #WallpaperRemoval #HomeRefresh #NewLook #ProfessionalPainters",
-        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
-        "link": "https://cgipropainters.com"
-    },
     // {
-    //     "message": "From start to finish, CGI Pro Painters handle it all! Quality craftsmanship with every project. #SuperiorQuality #ProfessionalPainters #AttentionToDetail #ExpertPainters",
-    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
+    //     "message": "Out with the old, in with the new! CGI Pro Painters make wallpaper removal and painting stress-free. #WallpaperRemoval #HomeRefresh #NewLook #ProfessionalPainters",
+    //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_ofstgh.jpg',
     //     "link": "https://cgipropainters.com"
     // },
+    {
+        "message": "From start to finish, CGI Pro Painters handle it all! Quality craftsmanship with every project. #SuperiorQuality #ProfessionalPainters #AttentionToDetail #ExpertPainters",
+        "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/Painting_Services_Design_Templates_-_Made_with_PosterMyWall_1_gdz43l.jpg',
+        "link": "https://cgipropainters.com"
+    },
     // {
     //     "message": "Elevate your living space with CGI Pro Painters! Custom painting solutions tailored to you. #BespokePainting #InteriorDesign #SpaceEnhancement #HomeRevamp",
     //     "image_url": 'https://res.cloudinary.com/dxtsuejin/image/upload/v1718979891/House_Painting_Services_Flyer_-_Made_with_PosterMyWall_ygam1p.jpg',
