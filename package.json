@@ -37,6 +37,8 @@
     "express": "^4.18.2",
     "fb": "^2.0.0",
     "instagram-private-api": "^1.46.1",
+    "lodash": "^4.17.21",
+    "microsoft-cognitiveservices-speech-sdk": "^1.23.0",
     "mongoose": "^8.0.3",
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
