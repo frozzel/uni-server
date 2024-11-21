@@ -1,5 +1,5 @@
 const axios = require('axios');
-var textToSpeech = require('../utils/tts');
+var textToSpeech = require('../Utils/tts');
 
 ////////// ChatGPT API //////////
 

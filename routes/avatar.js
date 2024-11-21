@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const textToSpeech = require('../utils/tts');
+// const textToSpeech = require('../utils/tts');
+const textToSpeech = require('../Utils/tts');
 
 // import controller
 const {chatGpt} = require('../controllers/avatar');
