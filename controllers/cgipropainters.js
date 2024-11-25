@@ -7,7 +7,9 @@ const post = require('./seedData.js');
 const cron = require('node-cron');
 const {downloadFile} = require('../Utils/download.js');
 
-
+/////////////////////////////////////
+///// Depreciated Client Trial //////
+/////////////////////////////////////
 
 ////////// Test API //////////
 exports.testApi = (req, res) => {
@@ -79,7 +81,7 @@ postTwitterCGI = async (req, res) => {
 
 cron.schedule('30 21 * * 4', () => {
     console.log('𝕏𝕏𝕏𝕏𝕏 CGI Pro Painters Posting to twitter every day at at 9:30 utc 5:30pm EST! 🐥🐥🐥🐥🐥');
-    postTwitterCGI();
+    // postTwitterCGI();
   }
   , null, true, 'America/New_York');
 
@@ -123,7 +125,7 @@ postFacebookCGI = async (req, res) => {
 
 cron.schedule('30 22 * * 1', () => {
     console.log('CGI Pro Painters Posting to facebook every day at 6:30PM 22utc ⓕⓕⓕⓕⓕ');
-    postFacebookCGI();
+    // postFacebookCGI();
   }, null, true, 'America/New_York');
 
 
@@ -180,6 +182,6 @@ postInstagramCGI = async (req, res) => {
 
 cron.schedule('30 16 * * 2', () => {
   console.log('CGI Posting to Instagram at 8am (12utc)📸 📸');
-  postInstagramCGI();
+  // postInstagramCGI();
 }, null, true, 'America/New_York');
 
