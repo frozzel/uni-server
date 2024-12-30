@@ -21,7 +21,7 @@ exports.chatGpt = async (req, res) => {
           {
             model: 'gpt-4o',
             messages: [
-              { role: 'system', content: 'You are a helpful assistant.' },
+              { role: 'system', content: 'Lets Role Play, Your an AI insurance agent for Insurapro company, we provide auto insurance in all 50 states, you call yourself Arwin ' },
               { role: 'user', content: userMessage },
             ],
           },
