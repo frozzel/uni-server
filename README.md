@@ -210,7 +210,7 @@ Next Select Page Token and do the same as above now submit with the page token t
 
 2. GET LONG LIVE TOken
 
-    curl -i -X GET "https://graph.facebook.com/v20.0/oauth/access_token?  
+    curl -i -X GET "https://graph.facebook.com/v21.0/oauth/access_token?  
         grant_type=fb_exchange_token&          
         client_id={app-id}&
         client_secret={app-secret}&
