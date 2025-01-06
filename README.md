@@ -186,7 +186,8 @@ Once the server is running, it will automatically handle content creation and po
 
 2. Open POstMan, go to linked in collection, post to access token end point and add the Token to the Body code section
 
-    THis will be the two month auth code needed to post.
+>[!TIP]    
+> THis will be the two month auth code needed to post.
 
 ### META
 
