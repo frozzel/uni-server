@@ -260,7 +260,7 @@ postTweetBusNews = async (req, res) => {
 };
 
 
-// postTweetBusNews()
+// postTweet()
 
 ////////// Cron API //////////
 
@@ -333,12 +333,12 @@ cron.schedule('0 21 * * *', async () => {
           console.log("CHATGPT", reply);
 
         // const img = req.body.imageUrl; // Assuming the image URL is provided in the request body
-        // const { filePath } = await downloadFile(lastObject.featuredImage); // Download the image and get the file path
-        // const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+        const { filePath } = await downloadFile(lastObject.featuredImage); // Download the image and get the file path
+        const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
         // const tweet = req.body.tweet;
         const resp = await client.v2.tweet({
             text: reply,
-            // media: { media_ids: [mediaId] }
+            media: { media_ids: [mediaId] }
         });
         // res.json(resp);
         console.log("Tweeted Successfully 🐥🐥🐥🐥🐥 𝕏𝕏𝕏𝕏 Twitter", resp);
