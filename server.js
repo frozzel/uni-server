@@ -22,6 +22,7 @@ const newsRouter = require('./routes/news.js');
 const linkedinRouter = require('./routes/linkedin.js');
 const cgiProPaintersRouter = require('./routes/cgipropainters.js');
 const avatarRouter = require('./routes/avatar.js');
+const cozythrowieRoutes = require('./routes/cozythrowie.js');
 
 
 /////////////////////////// use routes ///////////////////////////
@@ -35,6 +36,8 @@ app.use('/api/news', newsRouter);
 app.use('/api/linkedin', linkedinRouter);
 app.use('/api/cgipropainters', cgiProPaintersRouter);
 app.use('/api/avatar', avatarRouter);
+app.use('/api/cozythrowie', cozythrowieRoutes);
+
 
 /////////////////////////// start server ///////////////////////////
 const server = require('http').Server(app); // import http
