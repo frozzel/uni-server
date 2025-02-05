@@ -1,6 +1,7 @@
 //////////// Cozy Throwie Controller ///////////////
 const { model } = require('mongoose');
 const Blog = require('../models/blog');
+const {downloadFile} = require('../Utils/download.js');
 
 
 ///////////// Importing Dependencies ///////////////
@@ -10,6 +11,9 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const { zodResponseFormat } = require("openai/helpers/zod");
 const { z } = require("zod");
 const cloudinary = require('../config/cloudinary');
+const { TwitterApi } = require('twitter-api-v2');
+const FB = require('fb');
+
 
 //////////////// testApi function ///////////////////////////
 exports.testApi = (req, res) => {
@@ -26,7 +30,7 @@ exports.testApi = (req, res) => {
 exports.getCozyBlogs = async (req, res) => {
   // console.log('Getting Cozy Blogs');
   try {
-      const blogs = await Blog.find().sort({ createdAt: -1 }).limit(10); // Fetch the last 10 posts
+      const blogs = await Blog.find().sort({ createdAt: -1 }).limit(11); // Fetch the last 10 posts
       // console.log('Blogs:', ...blogs);
       res.json({ message: blogs });
   } catch (error) {
@@ -218,3 +222,81 @@ const createBlogWithImages = async (req, res) => {
 };
 
 // createBlogWithImages()
+
+
+/////////// Twitter Post Function ///////////////
+
+const postTwitterCozy = async () => {
+    // Set the access token
+    const client = new TwitterApi({
+        appKey: process.env.TWITTER_API_KEY_COZY,
+        appSecret: process.env.TWITTER_API_SECRET_COZY,
+        accessToken: process.env.TWITTER_API_ACCESS_TOKEN_COZY,
+        accessSecret: process.env.TWITTER_API_ACCESS_SECRET_COZY
+        // Bearer: process.env.TWITTER_BEARER_TOKEN_COZY
+    });
+
+    try {
+        // Fetch the last blog post
+        const lastBlog = await Blog.findOne().sort({ createdAt: -1 }).limit(1);
+         
+        // console.log('Last Blog:', lastBlog);
+        // Post the content on Twitter
+        const { filePath } = await downloadFile(lastBlog.featuredPhotoUrl); // Download the image and get the file path
+        const mediaId = await client.v1.uploadMedia(filePath); // Upload the downloaded image
+        const resp = await client.v2.tweet({
+            text: lastBlog.twitter.text + ' ' + `https://cozythrowie.com/blog/` + lastBlog._id,  // Add the blog link to the tweet
+            media: { media_ids: [mediaId] }
+        });
+
+        console.log('Cozy Throwie Shared successfully: Twitter 🐦🐦🐦🐦🐦', resp);
+    } catch (error) {
+        console.error("Cozy Throwie Twitter Post Failed", error);
+    }
+};
+
+// postTwitterCozy()
+
+/////////// Instagram Post Function ///////////////////
+
+const postInstagramCozy = async () => {
+   /// set access token
+   FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN_COZY);
+
+    try {
+         // Fetch the last blog post
+         const lastBlog = await Blog.findOne().sort({ createdAt: -1 }).limit(1);
+        //  console.log('Last Blog:', lastBlog);
+         // Post the content on Instagram
+         FB.api(`/${process.env.IG_ID_COZY}/media`, 'POST', {
+            media_type: 'IMAGE',
+            image_url: lastBlog.featuredPhotoUrl,
+            caption: lastBlog.instagram.text + ' ' + `https://cozythrowie.com/blog/` + lastBlog._id,
+            comment_enabled: true,
+            published: true
+        }, function (response) {
+            if (response.error) {
+                console.error("Cozy Throwie Instagram Post Failed", response.error);
+            } else {
+                console.log('Cozy Throwie Shared successfully: Instagram 📸📸📸📸📸', response);
+            }
+            const photoId = response.id;
+            
+            /// Publish the photo to Instagram
+            FB.api(`/process.env.IG_ID_COZY/media_publish`, 'POST', {
+                creation_id: photoId
+            }, function (response) {
+                if (!response || response.error) {
+                    console.error("Cozy Throwie Instagram Post Failed", response.error);
+                } else {
+                    console.log('Cozy Throwie Shared successfully: Instagram 📸📸📸📸📸', response);
+                }
+
+            });
+        });
+        } catch (error) {
+         console.error("Cozy Throwie Instagram Post Failed", error);
+    }
+}
+
+// postInstagramCozy()
