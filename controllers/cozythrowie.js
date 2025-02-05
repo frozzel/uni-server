@@ -283,7 +283,7 @@ const postInstagramCozy = async () => {
             const photoId = response.id;
             
             /// Publish the photo to Instagram
-            FB.api(`/process.env.IG_ID_COZY/media_publish`, 'POST', {
+            FB.api(`/${process.env.IG_ID_COZY}/media_publish`, 'POST', {
                 creation_id: photoId
             }, function (response) {
                 if (!response || response.error) {
@@ -300,3 +300,50 @@ const postInstagramCozy = async () => {
 }
 
 // postInstagramCozy()
+
+/////////// facebook Post Function ///////////////////
+
+const postFacebookCozy = async () => {
+    // Set the access token
+    FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN_COZY);
+
+    try {
+        // Fetch the last blog post
+        const lastBlog = await Blog.findOne().sort({ createdAt: -1 }).limit(1);
+        // console.log('Last Blog:', lastBlog);
+        // Post the content on Facebook
+
+        const shareData = {
+            // message: lastBlog.facebook.text `https://cozythrowie.com/blog/` + lastBlog._id,
+            url: lastBlog.featuredPhotoUrl,
+        };
+
+        FB.api(`/${process.env.FB_PAGE_ID_COZY}/photos`, 'POST', shareData, function (fbRes) {
+          if(!fbRes || fbRes.error) {
+            console.error('Error posting to Facebook: Cozy Throwie', fbRes.error);
+            return;
+          }
+          console.log('Cozy Throwie Shared successfully: Facebook ⓕⓕⓕⓕⓕ', fbRes);
+          const pageId = fbRes.post_id;
+          console.log("PageId:", pageId);
+
+            FB.api(`/${pageId}`, 'POST', {
+                    message: lastBlog.facebook.text + ' ' + `https://cozythrowie.com/blog/` + lastBlog._id,
+                    published: true
+                }, function (response) {
+                    if (!response || response.error) {
+                        console.error("Cozy Throwie Facebook Post Failed", response.error);
+                    } else {
+                        console.log('Cozy Throwie Shared successfully: Facebook ⓕⓕⓕⓕⓕ', response);
+                    }
+                });
+          
+        });
+
+
+    } catch (error) {
+        console.error("Cozy Throwie Facebook Post Failed", error);
+    }
+}
+
+// postFacebookCozy()
