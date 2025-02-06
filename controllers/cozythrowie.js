@@ -13,6 +13,7 @@ const { z } = require("zod");
 const cloudinary = require('../config/cloudinary');
 const { TwitterApi } = require('twitter-api-v2');
 const FB = require('fb');
+const cron = require('node-cron');
 
 
 //////////////// testApi function ///////////////////////////
@@ -135,7 +136,7 @@ const createBlogWithImages = async (req, res) => {
                   role: "system",
                   content: "You are a content creator for Cozy Throwie...",
               },
-              { role: "user", content: `I would like to create a blog post about: ${randomTopics}` },
+              { role: "user", content: `I would like to create a blog post about: ${randomTopics}, include 2 to 3 product links for each section` },
           ],
           response_format: zodResponseFormat(blogSchema, "Blog"),
       });
@@ -347,3 +348,17 @@ const postFacebookCozy = async () => {
 }
 
 // postFacebookCozy()
+
+///////////////////////// Cozy Throwie Cron Schedule //////////////////////////
+
+cron.schedule('40 17 * * *', () => {
+    console.log('Cozy Throwie Posting to Blog every day at 1:40PM 17utc ');
+    createBlogWithImages();
+}, null, true, 'America/New_York');
+
+cron.schedule('45 17 * * *', () => {
+    console.log('Cozy Throwie Posting to Social Media every day at 1:45PM 17utc ');
+    postTwitterCozy();
+    postInstagramCozy();
+    postFacebookCozy();
+}, null, true, 'America/New_York');
