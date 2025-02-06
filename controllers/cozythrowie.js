@@ -351,13 +351,13 @@ const postFacebookCozy = async () => {
 
 ///////////////////////// Cozy Throwie Cron Schedule //////////////////////////
 
-cron.schedule('55 17 * * *', () => {
-    console.log('Cozy Throwie Posting to Blog every day at 1:40PM 17utc ');
+cron.schedule('3 19 * * *', () => {
+    console.log('Cozy Throwie Posting to Blog every day at 2PM 19utc ');
     createBlogWithImages();
 }, null, true, 'America/New_York');
 
-cron.schedule('01 18 * * *', () => {
-    console.log('Cozy Throwie Posting to Social Media every day at 1:45PM 17utc ');
+cron.schedule('10 19 * * *', () => {
+    console.log('Cozy Throwie Posting to Social Media every day at 2PM 19utc ');
     postTwitterCozy();
     postInstagramCozy();
     postFacebookCozy();
