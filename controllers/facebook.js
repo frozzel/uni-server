@@ -13,30 +13,6 @@ exports.testApi = (req, res) => {
 ////////// Facebook API //////////
 
 
-
-// Data to share
-
-// const shareData = {
-//   link: 'https://cyrusgroupinnovations.com/blog/ai-content-generation-boosting-seo-performance',
-//   message: 'Check out this cool page!',
-// };
-
-// Share the content on Facebook
-
-// exports.postFacebook = async (req, res) => {
-//     FB.api(`/${process.env.FB_PAGE_ID}/feed`, 'POST', shareData, function (fbRes) {
-//         if (!fbRes || fbRes.error) {
-//           console.error('Error sharing:', fbRes.error || 'Unknown error');
-//           res.status(400).json({ error: fbRes || 'Unknown error'});
-//           return;
-//         }
-//         console.log('Shared successfully:', fbRes);
-//         res.status(200).json({ success: true, message: 'Shared on Facebook successfully' });
-//       });
-//     };
-
-// postFacebook();// 
-
 postFacebook = async (req, res) => {
   FB.setAccessToken(process.env.FACEBOOK_ACCESS_TOKEN);
 
@@ -267,7 +243,7 @@ postFacebookBusNews = async (req, res) => {
     });
 
 }
-// postFacebookBusNews();
+// postFacebookTechNews();
 // postFacebook()
 // Schedule the Facebook post
 
@@ -286,3 +262,27 @@ cron.schedule('0 17 * * *', () => {
     console.log('Posting Business News to facebook every day at 1PM 17utc ⓕⓕⓕⓕⓕ');
     postFacebookBusNews();
 }, null, true, 'America/New_York');
+
+
+
+/////////////////// Curl Token Request //////////////////////
+///// Allows Long Lived Access Token for 60 days ////////////
+/////////////////////////////////////////////////////////////
+
+
+const APP_ID = process.env.FACEBOOK_APP_ID
+const APP_SECRET = process.env.FACEBOOK_APP_SECRET
+const ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN   /////// change to your access token for page
+
+const url = `https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=${APP_ID}&client_secret=${APP_SECRET}&fb_exchange_token=${ACCESS_TOKEN}`;
+
+async function getAccessToken() {
+    try {
+        const response = await axios.get(url);
+        console.log('Access Token Response:', response.data);
+    } catch (error) {
+        console.error('Error fetching access token:', error.response ? error.response.data : error.message);
+    }
+}
+
+// getAccessToken();
