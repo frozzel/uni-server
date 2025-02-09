@@ -13,3 +13,6 @@ client_id={app-id}&
 client_secret={app-secret}&
 fb_exchange_token={your-access-token}"
 
+curl --location --request GET 'https://api-sandbox.pinterest.com/boards?' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <Add your token here>' 

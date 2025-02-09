@@ -14,6 +14,7 @@ const cloudinary = require('../config/cloudinary');
 const { TwitterApi } = require('twitter-api-v2');
 const FB = require('fb');
 const cron = require('node-cron');
+const axios = require('axios');
 
 
 //////////////// testApi function ///////////////////////////
@@ -349,6 +350,31 @@ const postFacebookCozy = async () => {
 
 // postFacebookCozy()
 
+
+//////////////  Cozy Pinterest Post Function //////////////////////
+
+const postPinterestCozy = async () => {
+    try {
+        const response = await axios.get('https://api.pinterest.com/v5/user_account', {
+            headers: {
+                'Authorization': `Bearer ${process.env.PINTEREST_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            params: {
+                scopes: 'boards:read,pins:read' // Example scopes
+            }
+        });
+        // res.json(response.data);
+        console.log('Pinterest Boards:', response.data);
+    } catch (error) {
+        console.error('Error fetching Pinterest boards:', error);
+        // res.status(500).json({ error: 'Failed to fetch Pinterest boards' });
+    }
+};
+
+// postPinterestCozy()
+
 ///////////////////////// Cozy Throwie Cron Schedule //////////////////////////
 
 cron.schedule('3 19 * * *', () => {
@@ -362,3 +388,7 @@ cron.schedule('10 19 * * *', () => {
     postInstagramCozy();
     postFacebookCozy();
 }, null, true, 'America/New_York');
+
+
+
+
