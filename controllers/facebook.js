@@ -268,6 +268,8 @@ cron.schedule('0 17 * * *', () => {
 /////////////////// Curl Token Request //////////////////////
 ///// Allows Long Lived Access Token for 60 days ////////////
 /////////////////////////////////////////////////////////////
+//// Change v21.0 to the latest version of the API /////////
+///// CGI Poster Page Access Token /////////////////////////
 
 
 const APP_ID = process.env.FACEBOOK_APP_ID

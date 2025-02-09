@@ -3,6 +3,7 @@ const cron = require('node-cron');
 const fs = require('fs');
 const { exec } = require('child_process');
 const {downloadFile} = require('../Utils/download.js');
+const { response } = require('express');
 
 
 
@@ -310,6 +311,7 @@ postLinkedInBusNews = async (req, res) => {
 }
 
 // postLinkedInBusNews();
+
 ////////// LinkedIn Cron Job //////////
 
 cron.schedule('30 18 * * *', async () => {
@@ -487,3 +489,36 @@ cron.schedule('0 22 * * *', async () => {
     console.log('Posting Business News to LinkedIn every day at 6pm 22utc');
     postLinkedInBusNews();
 }, null, true, 'America/New_York');
+
+
+/////////////// LinkedIn Oauth Call //////////////////////
+
+
+const CLIENT_ID = process.env.LINKEDIN_CLIENT_ID;
+
+const authorizationUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https%3A%2F%2Fwww.linkedin.com%2Fdevelopers%2Ftools%2Foauth%2Fredirect&scope=r_organization_social%20w_member_social%20w_organization_social%20openid%20profile%20r_ads_reporting%20rw_organization_admin%20r_ads%20rw_ads%20r_basicprofile%20r_organization_admin%20email%20r_1st_connections_size`;
+
+// console.log('Open this URL in your browser and authorize the app:', authorizationUrl);
+
+async function getAccessToken() {
+    const response = await axios.post(
+        'https://www.linkedin.com/oauth/v2/accessToken',
+        {
+            grant_type: 'authorization_code',
+            code: process.env.REDIRECT_CODE,
+            client_id: process.env.LINKEDIN_CLIENT_ID,
+            redirect_uri: "https://www.linkedin.com/developers/tools/oauth/redirect",
+            client_secret: process.env.LINKEDIN_CLIENT_SECRET,
+        },
+        {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        }
+    );
+
+    console.log('Access Token:', response.data);
+    // console.log(response)
+}
+
+// getAccessToken();
