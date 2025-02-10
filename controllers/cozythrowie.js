@@ -355,7 +355,7 @@ const postFacebookCozy = async () => {
 
 const postPinterestCozy = async () => {
     try {
-        const response = await axios.get('https://api.pinterest.com/v5/user_account', {
+        const response = await axios.get('https://api.pinterest.com/v5/pins', {
             headers: {
                 'Authorization': `Bearer ${process.env.PINTEREST_ACCESS_TOKEN}`,
                 'Content-Type': 'application/json',
@@ -363,12 +363,13 @@ const postPinterestCozy = async () => {
             },
             params: {
                 scopes: 'boards:read,pins:read' // Example scopes
+
             }
         });
         // res.json(response.data);
         console.log('Pinterest Boards:', response.data);
     } catch (error) {
-        console.error('Error fetching Pinterest boards:', error);
+        console.error('Error fetching Pinterest boards:', error.response.data);
         // res.status(500).json({ error: 'Failed to fetch Pinterest boards' });
     }
 };
