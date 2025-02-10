@@ -15,6 +15,7 @@ const { TwitterApi } = require('twitter-api-v2');
 const FB = require('fb');
 const cron = require('node-cron');
 const axios = require('axios');
+const { BlockedReason } = require('@google-cloud/vertexai');
 
 
 //////////////// testApi function ///////////////////////////
@@ -107,6 +108,29 @@ const blogTopicSchema = z.object({
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+const generateAndUploadImageWithOverlay = async (description, title, size) => {
+    const prompt = `${description}`;
+    const imageResponse = await openai.images.generate({
+        model: 'dall-e-3',
+        prompt: prompt,
+        n: 1,
+        size: size,
+    });
+
+    const imageUrl = imageResponse.data[0].url;
+    
+    // Upload image to Cloudinary and add overlay
+    const uploadResponse = await cloudinary.uploader.upload(imageUrl, {
+        folder: 'blog_images',
+        transformation: [
+            {crop: 'fill' },
+            { overlay: { font_family: "Permanent Marker", font_size: 60, weight: "bold", text: title }, y: 0.1, width: 1,  gravity: "north", color: "white", background: "black" }
+        ]
+    });
+    
+    return uploadResponse.secure_url;
+};
+
 const createBlogWithImages = async (req, res) => {
   console.log('🚀 Creating Blog with Images 🚀');
 
@@ -119,7 +143,7 @@ const createBlogWithImages = async (req, res) => {
               role: "system",
               content: "You are a content creator for Cozy Throwie...",
             },
-            { role: "user", content: "Provide 10 random trending topic for a home decor blog:" },
+            { role: "user", content: "Provide 30 random trending topic for a home decor blog:" },
           ],
           response_format: zodResponseFormat(blogTopicSchema, "Topics"),
 
@@ -163,13 +187,14 @@ const createBlogWithImages = async (req, res) => {
 
           return uploadResponse.secure_url;
       };
+    
 
       // Generate and upload the featured photo
       blog.featuredPhotoUrl = await generateAndUploadImage(blog.featuredPhotoDescription, "1792x1024");
 
       // Generate and upload the Pinterest photo with the title overlay, formatted for Pinterest
       const pinterestImageSize = "1024x1792"; // Commonly recommended size for Pinterest
-      blog.pinterest.photoUrl = await generateAndUploadImage(blog.pinterest.photoDescription, pinterestImageSize);
+      blog.pinterest.photoUrl = await generateAndUploadImageWithOverlay(blog.pinterest.photoDescription, blog.pinterest.titleOverlay, pinterestImageSize);
 
         // Ensure social media text is populated, else generate it
         const generateSocialMediaText = async (platform, goal, tags) => {
