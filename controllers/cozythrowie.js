@@ -381,7 +381,6 @@ const postFacebookCozy = async () => {
 const postPinterestCozy = async () => {
     try {
         const lastBlog = await Blog.findOne().sort({ createdAt: -1 }).limit(1);
-        console.log('Last Blog:', lastBlog.featuredPhotoUrl);
 
         const response = await axios.post('https://api-sandbox.pinterest.com/v5/pins',
            {
@@ -398,7 +397,7 @@ const postPinterestCozy = async () => {
             },
             {
                 headers: {
-                'Authorization': `Bearer ${process.env.PINTEREST_ACCESS_TOKEN}`,
+                'Authorization': `Bearer ${process.env.PINTEREST_ACCESS_TOKEN_SANDBOX}`,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
@@ -406,14 +405,14 @@ const postPinterestCozy = async () => {
        
         );
         // res.json(response.data);
-        console.log('Pinterest Boards:', response.data);
+        console.log(' Pinterest Pin Posted :', response.data);
     } catch (error) {
         console.error('Error fetching Pinterest boards:', error);
         // res.status(500).json({ error: 'Failed to fetch Pinterest boards' });
     }
 };
 
-// postPinterestCozy()
+postPinterestCozy()
 
 const getPinterestCozy = async () => {
     const apiKey = await ApiKey.findOne().sort({ createdAt: -1 }).limit(1);
@@ -431,10 +430,10 @@ const getPinterestCozy = async () => {
 
         });
         // res.json(response.data);
-        console.log('Pinterest Boards:', response.data);
+        console.log('Pinterest Pins List:', response.data);
     }
     catch (error) {
-        console.error('Error fetching Pinterest boards:', error.response.data);
+        console.error('Error fetching Pinterest Pins:', error.response.data);
         // res.status(500).json({ error: 'Failed to fetch Pinterest boards' });
     }
 };
@@ -454,6 +453,7 @@ cron.schedule('30 12 * * *', () => {
     postTwitterCozy();
     postInstagramCozy();
     postFacebookCozy();
+    // postPinterestCozy()
 }, null, true, 'America/New_York');
 
 cron.schedule('15 18 * * *', () => {
@@ -466,6 +466,7 @@ cron.schedule('30 18 * * *', () => {
     postTwitterCozy();
     postInstagramCozy();
     postFacebookCozy();
+    // postPinterestCozy()
 }, null, true, 'America/New_York');
 
 cron.schedule('15 23 * * *', () => {
@@ -478,6 +479,7 @@ cron.schedule('30 23 * * *', () => {
     postTwitterCozy();
     postInstagramCozy();
     postFacebookCozy();
+    // postPinterestCozy()
 }, null, true, 'America/New_York');
 
 
