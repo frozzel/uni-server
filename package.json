@@ -39,6 +39,7 @@
     "express": "^4.21.2",
     "fb": "^2.0.0",
     "instagram-private-api": "^1.46.1",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "microsoft-cognitiveservices-speech-sdk": "^1.23.0",
     "mongoose": "^8.0.3",

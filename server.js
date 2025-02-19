@@ -23,6 +23,7 @@ const linkedinRouter = require('./routes/linkedin.js');
 const cgiProPaintersRouter = require('./routes/cgipropainters.js');
 const avatarRouter = require('./routes/avatar.js');
 const cozythrowieRoutes = require('./routes/cozythrowie.js');
+const pinterestRouter = require('./routes/pinterest.js');
 
 
 /////////////////////////// use routes ///////////////////////////
@@ -37,6 +38,7 @@ app.use('/api/linkedin', linkedinRouter);
 app.use('/api/cgipropainters', cgiProPaintersRouter);
 app.use('/api/avatar', avatarRouter);
 app.use('/api/cozythrowie', cozythrowieRoutes);
+app.use('/api/pinterest', pinterestRouter);
 
 
 /////////////////////////// start server ///////////////////////////

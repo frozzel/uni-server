@@ -1,6 +1,7 @@
 //////////// Cozy Throwie Controller ///////////////
 const { model } = require('mongoose');
 const Blog = require('../models/blog');
+const ApiKey = require('../models/pinterest');
 const {downloadFile} = require('../Utils/download.js');
 
 
@@ -15,7 +16,6 @@ const { TwitterApi } = require('twitter-api-v2');
 const FB = require('fb');
 const cron = require('node-cron');
 const axios = require('axios');
-const { BlockedReason } = require('@google-cloud/vertexai');
 
 
 //////////////// testApi function ///////////////////////////
@@ -380,26 +380,67 @@ const postFacebookCozy = async () => {
 
 const postPinterestCozy = async () => {
     try {
-        const response = await axios.get('https://api.pinterest.com/v5/pins', {
-            headers: {
+        const lastBlog = await Blog.findOne().sort({ createdAt: -1 }).limit(1);
+        console.log('Last Blog:', lastBlog.featuredPhotoUrl);
+
+        const response = await axios.post('https://api-sandbox.pinterest.com/v5/pins',
+           {
+                board_id: process.env.PINTEREST_BOARD_ID,
+                title: lastBlog.pinterest.titleOverlay,
+                description: lastBlog.pinterest.text,
+                media_source: {
+                    source_type: "image_url",
+                    url: lastBlog.featuredPhotoUrl,
+                    is_standard: true
+                },
+                alt_text: lastBlog.pinterest.photoDescription,
+                link: `https://cozythrowie.com/blog/` + lastBlog._id
+            },
+            {
+                headers: {
                 'Authorization': `Bearer ${process.env.PINTEREST_ACCESS_TOKEN}`,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
-            params: {
-                scopes: 'boards:read,pins:read' // Example scopes
-
-            }
-        });
+        }
+       
+        );
         // res.json(response.data);
         console.log('Pinterest Boards:', response.data);
     } catch (error) {
-        console.error('Error fetching Pinterest boards:', error.response.data);
+        console.error('Error fetching Pinterest boards:', error);
         // res.status(500).json({ error: 'Failed to fetch Pinterest boards' });
     }
 };
 
 // postPinterestCozy()
+
+const getPinterestCozy = async () => {
+    const apiKey = await ApiKey.findOne().sort({ createdAt: -1 }).limit(1);
+    const PINTEREST_ACCESS_TOKEN = apiKey.decryptKey();
+    try {
+        const response = await axios.get('https://api.pinterest.com/v5/pins', {
+            headers: {
+                'Authorization': `Bearer ${PINTEREST_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            params: {
+                page_size: 10,
+            }
+
+        });
+        // res.json(response.data);
+        console.log('Pinterest Boards:', response.data);
+    }
+    catch (error) {
+        console.error('Error fetching Pinterest boards:', error.response.data);
+        // res.status(500).json({ error: 'Failed to fetch Pinterest boards' });
+    }
+};
+
+// getPinterestCozy()
+
 
 ///////////////////////// Cozy Throwie Cron Schedule //////////////////////////
 

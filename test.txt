@@ -13,6 +13,14 @@ client_id={app-id}&
 client_secret={app-secret}&
 fb_exchange_token={your-access-token}"
 
-curl --location --request GET 'https://api-sandbox.pinterest.com/boards?' \
+curl --location --request GET 'https://api.pinterest.com/v5/pins' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer <Add your token here>' 
+--header 'Authorization: Bearer ***' 
+
+{
+  access_token: '',
+  response_type: 'client_credentials',
+  token_type: 'bearer',
+  expires_in: 2592000,
+  scope: 'boards:read boards:write pins:read pins:write'
+}
