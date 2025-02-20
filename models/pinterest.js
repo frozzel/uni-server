@@ -1,6 +1,25 @@
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
+const algorithm = process.env.ALGORITHM; // 
+const secretKey = process.env.ENCRYPTION_SECRET; // 32-byte key (must be stored securely)
+const iv = process.env.ENCRYPTION_IV; // 16-byte IV (must be stored securely)
+
+// Encrypt API Key
+function encrypt(text) {
+    const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey, 'hex'), Buffer.from(iv, 'hex'));
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    return encrypted;
+}
+
+// Decrypt API Key
+function decrypt(encryptedText) {
+    const decipher = crypto.createDecipheriv(algorithm, Buffer.from(secretKey, 'hex'), Buffer.from(iv, 'hex'));
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+}
 
 const apiKeySchema = new mongoose.Schema({
     access_token: { type: String, required: true, unique: true },
@@ -11,19 +30,19 @@ const apiKeySchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Generate JWT-encrypted API key before saving
+// Encrypt API Key before saving
 apiKeySchema.pre('save', function (next) {
     if (!this.isModified('access_token')) return next();
-    this.access_token = jwt.sign({ access_token: this.access_token }, process.env.JWT_SECRET);
+    this.access_token = encrypt(this.access_token);
     next();
 });
 
 // Method to decrypt API key
 apiKeySchema.methods.decryptKey = function () {
     try {
-        const decoded = jwt.verify(this.access_token, process.env.JWT_SECRET);
-        return decoded.access_token;
+        return decrypt(this.access_token);
     } catch (error) {
+        console.error("Decryption error:", error);
         return null;
     }
 };

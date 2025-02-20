@@ -412,7 +412,7 @@ const postPinterestCozy = async () => {
     }
 };
 
-postPinterestCozy()
+// postPinterestCozy()
 
 const getPinterestCozy = async () => {
     const apiKey = await ApiKey.findOne().sort({ createdAt: -1 }).limit(1);

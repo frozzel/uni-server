@@ -18,6 +18,10 @@ const clientCredentialsController = async (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         });
+        const deleteKeys = await ApiKey.deleteMany({});
+
+        console.log( `🔑🔑🔑 Deleted Old Pinterest API Keys, Number Deleted: ${deleteKeys.deletedCount} key 🔑🔑🔑`);
+
         const apiKey = new ApiKey({
           access_token: response.data.access_token,
           response_type: response.data.response_type,
