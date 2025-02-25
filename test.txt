@@ -25,4 +25,3 @@ curl --location --request GET 'https://api.pinterest.com/v5/pins' \
   scope: 'boards:read boards:write pins:read pins:write'
 }
 
-AQRL9ARxdZzmgAfcTfyWCG6ZGnWOrmwb4nGKvorWTwXgYOuAeqqwTbRG-rDeovpQllGet-rB-UIHv57TJWdjt8gfwO6netzQbcv5FfEis6BKJd0IhPnPghyxjRnaBbS2pq24WDUCptKRT84iqcuYXecy-b1XJR6HdxjtzpKG4bFK3cAHmvwdCubCViNhSQaXqmgMzO1SAGVJ489pxus
