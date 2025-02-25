@@ -22,9 +22,11 @@ function decrypt(encryptedText) {
 }
 
 const apiKeySchema = new mongoose.Schema({
+    token_vendor: { type: String, required: false },
     access_token: { type: String, required: true, unique: true },
-    response_type: { type: String, required: true },
-    token_type: { type: String, required: true },
+    response_type: { type: String, required: false },
+    refresh_token: { type: String, required: false },
+    token_type: { type: String, required: false },
     expires_in: { type: Number, required: true },
     scope: { type: String, required: true },
     createdAt: { type: Date, default: Date.now }
@@ -37,9 +39,16 @@ apiKeySchema.pre('save', function (next) {
     next();
 });
 
+apiKeySchema.pre('save', function (next) {
+    if (!this.isModified('refresh_token')) return next();
+    this.refresh_token = encrypt(this.refresh_token);
+    next();
+});
+
 // Method to decrypt API key
 apiKeySchema.methods.decryptKey = function () {
     try {
+        console.log("Decrypting API Key");
         return decrypt(this.access_token);
     } catch (error) {
         console.error("Decryption error:", error);

@@ -4,6 +4,8 @@ const fs = require('fs');
 const { exec } = require('child_process');
 const {downloadFile} = require('../Utils/download.js');
 const { response } = require('express');
+const ApiKey = require('../models/pinterest.js');
+const { default: mongoose } = require('mongoose');
 
 
 
@@ -13,7 +15,11 @@ exports.testApi = (req, res) => {
 }
 
 ////////// LinkedIn Api //////////
+
 postBlogToLinkedIn = async (req, res) => {
+  const apiKey1 = await ApiKey.findOne({token_vendor: 'linkedin'}).limit(1);
+  const LINKEDIN_TOKEN = apiKey1.decryptKey();
+  
     console.log('Posting to LinkedIn........');
     try {
       console.log('Posting to LinkedIn  every weekday at 2:30 PM 18utc');
@@ -63,7 +69,7 @@ postBlogToLinkedIn = async (req, res) => {
             headers: {
               'LinkedIn-Version': process.env.LINKEDIN_VERSION,
               'X-Restli-Protocol-Version': '2.0.0',
-              'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+              'Authorization': `Bearer ${LINKEDIN_TOKEN}`,
               'Content-Type': 'application/json'
             }
           }
@@ -157,7 +163,7 @@ postBlogToLinkedIn = async (req, res) => {
               headers: {
                 'LinkedIn-Version': process.env.LINKEDIN_VERSION,
                 'X-Restli-Protocol-Version': '2.0.0',
-                'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+                'Authorization': `Bearer ${LINKEDIN_TOKEN}`,
                 'Content-Type': 'application/json'
               }
             },
@@ -179,6 +185,9 @@ postBlogToLinkedIn = async (req, res) => {
 }
 
 postLinkedInTechNews = async (req, res) => {
+  const apiKey1 = await ApiKey.findOne({token_vendor: 'linkedin'}).limit(1);
+  const LINKEDIN_TOKEN = apiKey1.decryptKey();
+
     console.log('Getting Tech News..........')
     const news = await axios.get(`https://newsapi.org/v2/everything?q=Technology+OR+AI+OR+Crypto+OR+Security+OR+startups+OR+apps&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
     console.log("News Articles", news.data.articles.length);
@@ -215,7 +224,7 @@ postLinkedInTechNews = async (req, res) => {
           headers: {
             'LinkedIn-Version': process.env.LINKEDIN_VERSION,
             'X-Restli-Protocol-Version': '2.0.0',
-            'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+            'Authorization': `Bearer ${LINKEDIN_TOKEN}`,
             'Content-Type': 'application/json'
           }
         }
@@ -309,7 +318,7 @@ postLinkedInTechNews = async (req, res) => {
               headers: {
                 'LinkedIn-Version': process.env.LINKEDIN_VERSION,
                 'X-Restli-Protocol-Version': '2.0.0',
-                'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+                'Authorization': `Bearer ${LINKEDIN_TOKEN}`,
                 'Content-Type': 'application/json'
               }
             },
@@ -327,6 +336,9 @@ postLinkedInTechNews = async (req, res) => {
 }
 
 postLinkedInBusNews = async (req, res) => {
+  const apiKey1 = await ApiKey.findOne({token_vendor: 'linkedin'}).limit(1);
+  const LINKEDIN_TOKEN = apiKey1.decryptKey();
+
     console.log('Getting Tech News..........')
     const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29+NOT%28climate+OR+trump+OR+biden+OR+DEI+OR+diversity+OR+Israel+OR+palestine+OR+environment%29&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
     console.log("News Articles", news.data.articles.length);
@@ -363,7 +375,7 @@ postLinkedInBusNews = async (req, res) => {
           headers: {
             'LinkedIn-Version': process.env.LINKEDIN_VERSION,
             'X-Restli-Protocol-Version': '2.0.0',
-            'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+            'Authorization': `Bearer ${LINKEDIN_TOKEN}`,
             'Content-Type': 'application/json'
           }
         }
@@ -457,7 +469,7 @@ postLinkedInBusNews = async (req, res) => {
               headers: {
                 'LinkedIn-Version': process.env.LINKEDIN_VERSION,
                 'X-Restli-Protocol-Version': '2.0.0',
-                'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
+                'Authorization': `Bearer ${LINKEDIN_TOKEN}`,
                 'Content-Type': 'application/json'
               }
             },
@@ -474,7 +486,7 @@ postLinkedInBusNews = async (req, res) => {
     console.log('Post to LinkedIn Completed');
 }
 
-// postLinkedInTechNews();
+// postLinkedInBusNews();
 // postBlogToLinkedIn();
 
 ////////// LinkedIn Cron Job //////////
@@ -499,10 +511,7 @@ cron.schedule('0 22 * * *', async () => {
 
 /////////////// LinkedIn Oauth Call //////////////////////
 
-
-const CLIENT_ID = process.env.LINKEDIN_CLIENT_ID;
-
-const authorizationUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https%3A%2F%2Fwww.linkedin.com%2Fdevelopers%2Ftools%2Foauth%2Fredirect&scope=r_organization_social%20w_member_social%20w_organization_social%20openid%20profile%20r_ads_reporting%20rw_organization_admin%20r_ads%20rw_ads%20r_basicprofile%20r_organization_admin%20email%20r_1st_connections_size`;
+const authorizationUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=https%3A%2F%2Fwww.linkedin.com%2Fdevelopers%2Ftools%2Foauth%2Fredirect&scope=r_organization_social%20w_member_social%20w_organization_social%20openid%20profile%20r_ads_reporting%20rw_organization_admin%20r_ads%20rw_ads%20r_basicprofile%20r_organization_admin%20email%20r_1st_connections_size`;
 
 // console.log('Open this URL in your browser and authorize the app:', authorizationUrl);
 
@@ -527,4 +536,49 @@ async function getAccessToken() {
     // console.log(response)
 }
 
+async function refreshAccessToken() {
+  try {
+    const response = await axios.post(
+      "https://www.linkedin.com/oauth/v2/accessToken",
+      {
+        grant_type: "refresh_token",
+        refresh_token: process.env.LINKEDIN_REFRESH_TOKEN,
+        client_id: process.env.LINKEDIN_CLIENT_ID,
+        client_secret: process.env.LINKEDIN_CLIENT_SECRET,
+        // redirect_uri: "https://www.linkedin.com/developers/tools/oauth/redirect",
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    const deleteKeys = await ApiKey.deleteOne({"token_vendor": "linkedin"});
+    console.log("🔑🔑🔑 Deleted Old LinkedIn API Keys, Number Deleted: ", deleteKeys);
+
+    console.log("LinkedIn Access Token Response:", response.data);
+
+    const apikey = new ApiKey({
+      token_vendor: "linkedin",
+      refresh_token: response.data.refresh_token,
+      access_token: response.data.access_token,
+      response_type: response.data.response_type,
+      expires_in: response.data.expires_in,
+      scope: response.data.scope,
+    });
+    await apikey.save();
+
+    console.log("🎯 LinkedIn API Key Generated 🔑"  );
+  } catch (error) {
+    console.error("Error refreshing LinkedIn access token:", error.response?.data || error.message, error);
+  }
+}
+
+// refreshAccessToken();
 // getAccessToken();
+
+cron.schedule('0 0 15 * *', () => {
+  console.log('🔑🔑 Running LinkedIn API KEY GENERATOR on the 15th of the month 🔑🔑');
+  refreshAccessToken();
+}, null, true, 'America/New_York');
