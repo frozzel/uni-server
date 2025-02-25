@@ -177,7 +177,7 @@ Once the server is running, it will automatically handle content creation and po
 
 1. Copy link below into Browser (first add client id from app for developer or env file)
 
-      https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=ADDYOURCLIENTIDHERE&redirect_uri=https%3A%2F%2Fwww.linkedin.com%2Fdevelopers%2Ftools%2Foauth%2Fredirect&scope=r_organization_social%20w_member_social%20w_organization_social%20openid%20profile%20r_ads_reporting%20rw_organization_admin%20r_ads%20rw_ads%20r_basicprofile%20r_organization_admin%20email%20r_1st_connections_size
+      https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=86i89e9uabr8au&redirect_uri=https%3A%2F%2Fwww.linkedin.com%2Fdevelopers%2Ftools%2Foauth%2Fredirect&scope=r_organization_social%20w_member_social%20w_organization_social%20openid%20profile%20r_ads_reporting%20rw_organization_admin%20r_ads%20rw_ads%20r_basicprofile%20r_organization_admin%20email%20r_1st_connections_size
 
       THE LINK WILL ASK FOR PERMISSION FROM YOUR LINKED IN ACCOUNT, SIGN IN AND HIT ALLOW, IT WILL REDIRECT YOU TO A BLANK PAGE
       YOU NEED THE CODE IN THE URL OF THIS BLANK PAGE FOR THE NEXT STEP 

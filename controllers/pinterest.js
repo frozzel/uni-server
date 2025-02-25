@@ -40,5 +40,5 @@ const clientCredentialsController = async (req, res) => {
 // Schedule a job to run at midnight on the 15th of every month
 cron.schedule('0 0 15 * *', () => {
     console.log('🔑🔑 Running Pinterest API KEY GENERATOR on the 15th of the month 🔑🔑');
-    clientCredentialsController();
+    // clientCredentialsController();
 }, null, true, 'America/New_York');

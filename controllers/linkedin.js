@@ -49,7 +49,7 @@ postLinkedInTechNews = async (req, res) => {
         },
         {
           headers: {
-            'LinkedIn-Version': '202402',
+            'LinkedIn-Version': process.env.LINKEDIN_VERSION,
             'X-Restli-Protocol-Version': '2.0.0',
             'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
             'Content-Type': 'application/json'
@@ -143,7 +143,7 @@ postLinkedInTechNews = async (req, res) => {
             },
             {
               headers: {
-                'LinkedIn-Version': '202402',
+                'LinkedIn-Version': process.env.LINKEDIN_VERSION,
                 'X-Restli-Protocol-Version': '2.0.0',
                 'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
                 'Content-Type': 'application/json'
@@ -197,7 +197,7 @@ postLinkedInBusNews = async (req, res) => {
         },
         {
           headers: {
-            'LinkedIn-Version': '202402',
+            'LinkedIn-Version': process.env.LINKEDIN_VERSION,
             'X-Restli-Protocol-Version': '2.0.0',
             'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
             'Content-Type': 'application/json'
@@ -291,7 +291,7 @@ postLinkedInBusNews = async (req, res) => {
             },
             {
               headers: {
-                'LinkedIn-Version': '202402',
+                'LinkedIn-Version': process.env.LINKEDIN_VERSION,
                 'X-Restli-Protocol-Version': '2.0.0',
                 'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
                 'Content-Type': 'application/json'
@@ -310,7 +310,7 @@ postLinkedInBusNews = async (req, res) => {
     console.log('Post to LinkedIn Completed');
 }
 
-// postLinkedInBusNews();
+// postLinkedInTechNews();
 
 ////////// LinkedIn Cron Job //////////
 
@@ -361,7 +361,7 @@ cron.schedule('30 18 * * *', async () => {
           },
           {
             headers: {
-              'LinkedIn-Version': '202402',
+              'LinkedIn-Version': process.env.LINKEDIN_VERSION,
               'X-Restli-Protocol-Version': '2.0.0',
               'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
               'Content-Type': 'application/json'
@@ -455,7 +455,7 @@ cron.schedule('30 18 * * *', async () => {
             },
             {
               headers: {
-                'LinkedIn-Version': '202402',
+                'LinkedIn-Version': process.env.LINKEDIN_VERSION,
                 'X-Restli-Protocol-Version': '2.0.0',
                 'Authorization': `Bearer ${process.env.LINKEDIN_TOKEN}`,
                 'Content-Type': 'application/json'
