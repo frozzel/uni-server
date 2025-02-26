@@ -25,3 +25,4 @@ curl --location --request GET 'https://api.pinterest.com/v5/pins' \
   scope: 'boards:read boards:write pins:read pins:write'
 }
 
+test
