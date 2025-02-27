@@ -508,7 +508,7 @@ cron.schedule('0 22 * * *', async () => {
     postLinkedInBusNews();
 }, null, true, 'America/New_York');
 
-cron.schedule('39 23 * * *', async () => {
+cron.schedule('45 00 * * *', async () => {
   console.log('Posting Business News to LinkedIn every day at 6pm 22utc');
   postLinkedInBusNews();
 }, null, true, 'America/New_York');
