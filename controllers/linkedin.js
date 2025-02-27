@@ -338,6 +338,7 @@ postLinkedInTechNews = async (req, res) => {
 postLinkedInBusNews = async (req, res) => {
   const apiKey1 = await ApiKey.findOne({token_vendor: 'linkedin'}).limit(1);
   const LINKEDIN_TOKEN = apiKey1.decryptKey();
+  console.log(LINKEDIN_TOKEN)
 
     console.log('Getting Tech News..........')
     const news = await axios.get(`https://newsapi.org/v2/everything?q=%2Bsmall+%2Bbusiness+AND+%28Supply+Chain+Disruptions+OR+Tax+Changes+OR+Rising+Costs+OR+Remote+Work+OR+E-commerce%29+NOT%28climate+OR+trump+OR+biden+OR+DEI+OR+diversity+OR+Israel+OR+palestine+OR+environment%29&pageSize=100&sortBy=relevancy&excludeDomains=engadget.com,yahoo.com&apiKey=${process.env.NEWS_API_KEY}`);
@@ -486,7 +487,7 @@ postLinkedInBusNews = async (req, res) => {
     console.log('Post to LinkedIn Completed');
 }
 
-// postLinkedInTechNews();
+// postLinkedInBusNews();
 // postBlogToLinkedIn();
 
 ////////// LinkedIn Cron Job //////////
@@ -508,7 +509,7 @@ cron.schedule('0 22 * * *', async () => {
     postLinkedInBusNews();
 }, null, true, 'America/New_York');
 
-cron.schedule('10 1 * * *', async () => {
+cron.schedule('35 1 * * *', async () => {
   console.log('Posting Business News to LinkedIn every day at 6pm 22utc');
   postLinkedInBusNews();
 }, null, true, 'America/New_York');
