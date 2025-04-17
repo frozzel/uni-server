@@ -276,7 +276,7 @@ const APP_ID = process.env.FACEBOOK_APP_ID
 const APP_SECRET = process.env.FACEBOOK_APP_SECRET
 const ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN   /////// change to your access token for page
 
-const url = `https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=${APP_ID}&client_secret=${APP_SECRET}&fb_exchange_token=${ACCESS_TOKEN}`;
+const url = `https://graph.facebook.com/v20.0/oauth/access_token?grant_type=fb_exchange_token&client_id=${APP_ID}&client_secret=${APP_SECRET}&fb_exchange_token=${ACCESS_TOKEN}`;
 
 async function getAccessToken() {
     try {

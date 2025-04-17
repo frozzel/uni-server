@@ -445,40 +445,40 @@ const getPinterestCozy = async () => {
 
 cron.schedule('15 12 * * *', () => {
     console.log('Cozy Throwie Posting to Blog every day at 7AM 13utc ');
-    createBlogWithImages();
+    // createBlogWithImages();
 }, null, true, 'America/New_York');
 
 cron.schedule('30 12 * * *', () => {
     console.log('Cozy Throwie Posting to Social Media every day at 7AM 13utc ');
-    postTwitterCozy();
-    postInstagramCozy();
-    postFacebookCozy();
+    // postTwitterCozy();
+    // postInstagramCozy();
+    // postFacebookCozy();
     // postPinterestCozy()
 }, null, true, 'America/New_York');
 
 cron.schedule('15 18 * * *', () => {
     console.log('Cozy Throwie Posting to Blog every day at 1PM 19utc ');
-    createBlogWithImages();
+    // createBlogWithImages();
 }, null, true, 'America/New_York');
 
 cron.schedule('30 18 * * *', () => {
     console.log('Cozy Throwie Posting to Social Media every day at 1PM 19utc ');
-    postTwitterCozy();
-    postInstagramCozy();
-    postFacebookCozy();
+    // postTwitterCozy();
+    // postInstagramCozy();
+    // postFacebookCozy();
     // postPinterestCozy()
 }, null, true, 'America/New_York');
 
 cron.schedule('15 23 * * *', () => {
     console.log('Cozy Throwie Posting to Blog every day at 6PM 23utc ');
-    createBlogWithImages();
+    // createBlogWithImages();
 }, null, true, 'America/New_York');
 
 cron.schedule('30 23 * * *', () => {
     console.log('Cozy Throwie Posting to Social Media every day at 6PM 23utc ');
-    postTwitterCozy();
-    postInstagramCozy();
-    postFacebookCozy();
+    // postTwitterCozy();
+    // postInstagramCozy();
+    // postFacebookCozy();
     // postPinterestCozy()
 }, null, true, 'America/New_York');
 

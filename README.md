@@ -194,8 +194,7 @@ Once the server is running, it will automatically handle content creation and po
 >[!NOTE]
 > Helpful articles for basic concept under standings:  [FACEBOOK API DOCS](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) && [META API DOCS](https://developers.facebook.com/tools/explorer/?method=POST&path=me%3Ffields%3Did%2Cname&version=v19.0)
 
-1. Go To graph API Explorer, Hit Generate Access Token to reauthorize user first, submit the GET request to verify its working. Save Token
-Next Select Page Token and do the same as above now submit with the page token to verify page access. 
+1. "CYRUS BLOG POSTER" Go To graph API Explorer, Hit Generate Access Token to reauthorize user first, submit the GET request to verify its working. Save Token, Next Select Page Token and do the same as above now submit with the page token to verify page access. 
 
 > [!CAUTION]
 > THIS ONLY LAST AN HOUR 
@@ -210,7 +209,7 @@ Next Select Page Token and do the same as above now submit with the page token t
 
 2. GET LONG LIVE TOken
 
-    curl -i -X GET "https://graph.facebook.com/v21.0/oauth/access_token?  
+    curl -i -X GET "https://graph.facebook.com/v20.0/oauth/access_token?  
         grant_type=fb_exchange_token&          
         client_id={app-id}&
         client_secret={app-secret}&
