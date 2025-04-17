@@ -2,13 +2,35 @@ const axios = require('axios');
 const {TwitterApi} = require('twitter-api-v2');
 const cron = require('node-cron');
 const {downloadFile} = require('../Utils/download.js');
-
+const OpenAI = require('openai');
 
 ////////// Test API //////////
 
 exports.testApi = (req, res) => {
     res.send('Hello, Twitter! 🐥 𝕏');
 }
+////////// OpenAI API USING GROK //////////
+
+imgGen = async (req, res) => {
+    const openai = new OpenAI({
+      apiKey: process.env.X_AI_API_KEY,
+      baseURL: "https://api.x.ai/v1",
+    });
+    
+    try {
+        const response = await openai.images.generate({
+            model: "grok-2-image",
+            prompt: "A cat in a tree",
+        });
+        console.log("Response", response.data[0].url);
+        // res.json({url: response.data[0].url});
+    } catch (error) {
+        console.error("Error generating image", error);
+        // res.status(500).json({error: 'Error generating image'});
+    }
+}
+// imgGen();
+
 
 ////////// Twitter API //////////
 
