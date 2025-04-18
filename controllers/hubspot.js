@@ -742,12 +742,21 @@ createBlogPost = async (req, res) => {
       console.log("Featured Image:", dallePrompt);
 
       ////// Get image from Dalle-3 //////
+      /// to use Dalle-3, uncomment the lines below and comment the x-ai code /////
 
-      const getImage = await openai.images.generate({
-        model: "dall-e-3",
+      const x_AI = new OpenAI({
+            apiKey: process.env.X_AI_API_KEY,
+            baseURL: "https://api.x.ai/v1",
+          });
+
+      const getImage = await x_AI.images.generate({
+        // model: "dall-e-3",
+        // prompt: dallePrompt,
+        // n: 1,
+        // size: "1792x1024",
+        model: "grok-2-image",
         prompt: dallePrompt,
-        n: 1,
-        size: "1792x1024",
+
       });
 
       const image_url = getImage.data[0].url;
