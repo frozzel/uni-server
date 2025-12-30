@@ -10,7 +10,7 @@ const {chatGpt} = require('../controllers/avatar');
 
 router.post('/talk', chatGpt)
 router.post('/talk2', function(req, res, next) {
-    // console.log(req.body.text);
+    console.log(req.body.text);
 
 
     textToSpeech(req.body.text, req.body.voice)
