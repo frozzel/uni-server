@@ -15,10 +15,11 @@ router.post('/talk2', function(req, res, next) {
 
     textToSpeech(req.body.text, req.body.voice)
     .then(result => {
+      console.log('TTS Result:', result.filename);  
       res.json(result);    
     })
     .catch(err => {
-      res.json({});
+      res.json({error: 'TTS conversion failed', details: err.message});
     });
   
   

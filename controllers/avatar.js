@@ -37,11 +37,12 @@ exports.chatGpt = async (req, res) => {
         console.log('ChatGPT Reply:', reply);
         textToSpeech(reply, req.body.voice)
         .then(result => {
+          console.log('TTS Result:', result.filename);
             res.json(result)
 
         })
         .catch(err =>{
-            res.json({})
+            res.json({error: 'TTS conversion failed', details: err.message})
         })
 
 };
