@@ -28,6 +28,7 @@ const textToSpeech = async (text, voice)=> {
         
 
         let ssml = SSML.replace("__TEXT__", text);
+        console.log('SSML:', ssml);
 
         
         const speechConfig = sdk.SpeechConfig.fromSubscription(key, region);
@@ -74,6 +75,9 @@ const textToSpeech = async (text, voice)=> {
             ssml,
             result => {
                 synthesizer.close();
+                console.log(`Audio content written to file: ${filename}`);
+                console.log('Blendshape data points:', blendData.length);
+                console.log(result)
                 resolve({blendData, filename: `/speech-${randomString}.mp3`});
 
             },
